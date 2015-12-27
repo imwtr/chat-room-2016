@@ -140,7 +140,7 @@ var Util = {
 				xhr = new XMLHTTPRequest();
 			} catch (e) {
 				try {
-					xhr = new ActiveXObject('Mxml2.XMLHTTP');
+					xhr = new ActiveXObject('Msxml2.XMLHTTP');
 				} catch (e) {
 					try {
 						xhr = new ActiveXObject('Microsoft.XMLHTTP');

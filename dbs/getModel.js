@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var schema = require('schema');
+var schema = require('./schema');
 
 // schema发布为model
 for (var item in schema) {

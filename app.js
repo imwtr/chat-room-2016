@@ -11,17 +11,18 @@ var session = require('express-session');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var cfg = require('cfg');
+var cfg = require('./cfg');
 
 // 全局model操作器 
-window['modelHandle'] = require('dbs/modelHandle');
+global.modelHandle = require('./dbs/modelHandle');
 // 全局数据库对象
-window['db'] = mongoose.connect(cfg.server.uri);
+console.log(cfg.server.uri);
+global.db = mongoose.connect(cfg.server.uri);
 
 var app = express();
 
 // 定义session有效期
-app.use(session( {
+app.use(session({
   secret: 'secret',
   cookie: {
     maxAge: 1000 * 60 * 60 * 24

@@ -1,4 +1,4 @@
-var getModel = require('getModel');
+var getModel = require('./getModel');
 
 module.exports = modelHandle;
 

@@ -1,0 +1,79 @@
+
+.navbar-brand{
+	margin-top: -13px;
+	margin-right: 50px;
+}
+.navbar-form .input-group{
+	margin-left: 30px;
+}
+#search-menu {
+	margin-top: -10px;
+	margin-left: -2px;
+	min-width: 70px;
+}
+#search-menu a:hover,
+#user-menu a:hover {
+	background-color: #428bca;
+	color: #fff;
+}
+
+.login-state,
+.user-info {
+	margin-top: 10px;
+	margin-right: 50px;
+}
+.user-info .dropdown-menu {
+	margin-top: -20px;
+	margin-left: -2px;
+	min-width: 100px;
+}
+.campus-logo {
+	margin-top: -425px;
+	margin-left: -10px;
+}
+.campus-list li {
+	padding-top: 10px;
+	padding-bottom: 5px;
+	border-bottom: 1px dotted #ccc;
+}
+.campus-list li:hover {
+	cursor: pointer;
+	background-color: #ddf;
+}
+#create-room {
+	margin-top: -8px;
+}
+.room-name {
+	width: 8em;
+	text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
+    white-space: nowrap;
+}
+.room-logo {
+	position: relative;
+	display: inline-block;
+	width: 130px;
+	height: 130px;
+	overflow: hidden;
+}
+.room-logo img:hover {
+	transform: scale(1.2, 1.2);
+	transition: transform .3s ease-in-out;
+}
+.room-info {
+	margin-bottom: 30px;
+}
+.room-info p {
+	margin: 3px;
+	font-size: 12px;
+}
+
+.room-user-num-wrap {
+	position: absolute;
+	z-index: 100;
+	right: 2px;
+	bottom: -10px;
+	font-size: 12px;
+	color: #fff;
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SpriteFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" CssFileName="../images" ImageName="img" IsPhone="false" xmlns="CssSprite">
+  <SpriteList>
+    <Sprite Path="中山大学.png" LocationX="0" LocationY="0" />
+    <Sprite Path="华南理工大学.png" LocationX="0" LocationY="126" />
+    <Sprite Path="华南师范大学.png" LocationX="0" LocationY="262" />
+    <Sprite Path="广州大学.png" LocationX="0" LocationY="392" />
+    <Sprite Path="广东外语外贸大学.png" LocationX="0" LocationY="524" />
+    <Sprite Path="广东药学院.png" LocationX="0" LocationY="784" />
+    <Sprite Path="广州中医药大学.png" LocationX="0" LocationY="654" />
+    <Sprite Path="广东工业大学.png" LocationX="0" LocationY="898" />
+    <Sprite Path="广州美术学院.png" LocationX="0" LocationY="1021" />
+    <Sprite Path="星海音乐学院.png" LocationX="0" LocationY="1145" />
+  </SpriteList>
+</SpriteFile>

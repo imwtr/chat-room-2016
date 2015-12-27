@@ -1,11 +1,232 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>咫尺一家 - 你我的在线聊天室</title>
+		<meta name="keywords" content="咫尺一家,在线,聊天室">
+		<meta name="description" content="咫尺一家 - 你我的在线聊天室">
+		<meta name="author" content="">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/default.css">
+		<link rel="stylesheet" href="css/index.css">
+	</head>
+	<body>
+		<!-- S 导航栏 -->
+		<nav class="navbar navbar-inverse" role="navigation">
+			<div class="navbar-header">
+				<a href="/" class="navbar-brand">
+					<img src="img/logo0.png" alt="logo">
+				</a>
+			</div>
+			<div>
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="/">首页</a>
+					</li>
+					<li>
+						<a href="/hot">热门</a>
+					</li>
+				</ul>
+				<div class="nav navbar-nav navbar-right">
+					<div class="login-state hide">
+						<a href="/register">注册</a>
+						<a href="/login">登录</a>
+					</div>
+					<div class="user-info">
+						<a href="/modify"><img src="img/中山大学.png" alt="头像" width="30px" height="30px" class="img-circle"></a>
+						<a href="#" class="data-toggle" data-toggle="dropdown">Fisher
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" id="user-menu">
+							<li><a href="/user">个人中心</a></li>
+							<li><a href="/friends">我的好友</a></li>
+							<li class="divider"></li>
+							<li><a href="/logout">注销</a></li>
+						</ul>
+					</div>
+				</div>
+				<form class="navbar-form" role="search" name="search-form" method="get" action="/search">
+					<div class="input-group">
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="search-condition">不限
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" id="search-menu">
+								<li data-val = "不限" class="active"><a href="#">不限</a></li>
+								<li data-val = "房名"><a href="#">房名</a></li>
+								<li data-val = "房号"><a href="#">房号</a></li>
+								<li data-val = "昵称"><a href="#">昵称</a></li>
+							</ul>
+						</div>
+						<div class="form-group">
+						<input type="text" class="form-control" id="search-input" placeholder="搜索">
+					</div>
+						<button type="button" class="btn btn-default navbar-btn" id="search-btn">查找</button>
+					</div>
+				</form>
+				
+				
+			</div>
+		</nav>
+		<!-- E 导航栏 -->
+
+		<!-- S 主体部分 -->
+		<div class="container">
+			<div class="row">
+				<!-- S 分类列表 -->
+				<div class="col-sm-3">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<h3 class="panel-title">分类列表</h3>
+						</div>
+						<div class="panel-body">
+							<ul class="list-unstyled campus-list text-center">
+								<li data-val="中山大学"><a href="#">中山大学</a></li>
+								<li data-val="华南理工大学"><a href="#">华南理工大学</a></li>
+								<li data-val="华南师范大学"><a href="#">华南师范大学</a></li>
+								<li data-val="广州大学"><a href="#">广州大学</a></li>
+								<li data-val="广东外语外贸大学"><a href="#">广东外语外贸大学</a></li>
+								<li data-val="广州中医药大学"><a href="#">广州中医药大学</a></li>
+								<li data-val="广东药学院"><a href="#">广东药学院</a></li>
+								<li data-val="广东工业大学"><a href="#">广东工业大学</a></li>
+								<li data-val="广州美术大学"><a href="#">广州美术大学</a></li>
+								<li data-val="星海音乐学院"><a href="#">星海音乐学院</a></li>
+								<li data-val="其他"><a href="#">其他</a></li>
+							</ul>
+							<img src="img/campus.png" alt="campus_logo" class="campus-logo">
+						</div>
+					</div>
+				</div>
+				<!-- E 分类列表 -->
+
+				<!-- S 房间列表 -->
+				<div class="col-sm-9">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<h3 class="panel-title">房间列表
+								<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create-room-modal" id="create-room">
+									<span class="glyphicon glyphicon-plus"></span> 创建房间
+								</button>
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-sm-3">
+									<div class=" text-center">
+										<h6 class="" title="我是房名我是房名我是房名ee">我是房名我是...</h6>
+										<a href="/room" class="room-logo">
+											<img src="img/room_1_1.jpg" alt="room" width="130px" height="130px">
+											<p class="room-user-num-wrap">
+												<span class="hide">统计：</span>
+												<span class="room-user-num">123325</span>人热聊中
+											</p>
+										</a>
+										<div class="caption room-info">
+											<p>房间ID: <span class="room-id" data-toggle="popover"><a href="/room">123456</a></span></p>
+											<p>房主： <span class="room-owner" data-toggle="popover"><a href="/user">我是房主</a></span></p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class=" text-center">
+										<h6 class="" title="我是房名我是房名我是房名ee">我是房名我是...</h6>
+										<a href="/room" class="room-logo">
+											<img src="img/room_1_2.jpg" alt="room" width="130px" height="130px">
+											<p class="room-user-num-wrap">
+												<span class="hide">统计：</span>
+												<span class="room-user-num">123325</span>人热聊中
+											</p>
+										</a>
+										<div class="caption room-info">
+											<p>房间ID: <span class="room-id" data-toggle="popover"><a href="/room">123456</a></span></p>
+											<p>房主： <span class="room-owner" data-toggle="popover"><a href="/user">我是房主</a></span></p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class=" text-center">
+										<h6 class="" title="我是房名我是房名我是房名ee">我是房名我是...</h6>
+										<a href="/room" class="room-logo">
+											<img src="img/room_1_3.jpg" alt="room" width="130px" height="130px">
+											<p class="room-user-num-wrap">
+												<span class="hide">统计：</span>
+												<span class="room-user-num">123325</span>人热聊中
+											</p>
+										</a>
+										<div class="caption room-info">
+											<p>房间ID: <span class="room-id" data-toggle="popover"><a href="/room">123456</a></span></p>
+											<p>房主： <span class="room-owner" data-toggle="popover"><a href="/user">我是房主</a></span></p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class=" text-center">
+										<h6 class="" title="我是房名我是房名我是房名ee">我是房名我是...</h6>
+										<a href="/room" class="room-logo">
+											<img src="img/room_1_4.jpg" alt="room" width="130px" height="130px">
+											<p class="room-user-num-wrap">
+												<span class="hide">统计：</span>
+												<span class="room-user-num">123325</span>人热聊中
+											</p>
+										</a>
+										<div class="caption room-info">
+											<p>房间ID: <span class="room-id" data-toggle="popover"><a href="/room">123456</a></span></p>
+											<p>房主： <span class="room-owner" data-toggle="popover"><a href="/user">我是房主</a></span></p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class=" text-center">
+										<h6 class="" title="我是房名我是房名我是房名ee">我是房名我是...</h6>
+										<a href="/room" class="room-logo">
+											<img src="img/room_1_3.jpg" alt="room" width="130px" height="130px">
+											<p class="room-user-num-wrap">
+												<span class="hide">统计：</span>
+												<span class="room-user-num">123325</span>人热聊中
+											</p>
+										</a>
+										<div class="caption room-info">
+											<p>房间ID: <span class="room-id" data-toggle="popover"><a href="/room">123456</a></span></p>
+											<p>房主： <span class="room-owner" data-toggle="popover"><a href="/user">我是房主</a></span></p>
+										</div>
+									</div>
+								</div>
+								
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- E 房间列表 -->
+			</div>
+		</div>
+		<!-- E 主体部分 -->
+
+		<!-- S 创建房间模态框 -->
+		<div class="modal fade" id="create-room-modal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">创建房间</h4>
+					</div>
+					<div class="modal-body">
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary">创建</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- E 创建房间模态框 -->
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="js/index.js"></script>
+	</body>
 </html>
