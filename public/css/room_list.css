@@ -1,0 +1,10 @@
+.my-container {
+	padding-right: 20px;
+	padding-left: 20px;
+}
+#chat-content-title {
+	cursor: default;
+}
+#chat-content-editBox {
+	min-height: 500px;
+}

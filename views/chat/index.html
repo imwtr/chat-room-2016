@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>我的聊天</title>
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/css/default.css">
+		<link rel="stylesheet" href="/css/chat_list.css">
+	</head>
+	<body>
+		
+		<div id="chat-content-wrapper">
+			<div id="chat-content-title">
+				<h4 class="chat-title">
+					<a href="#">且听风大发发大水</a>
+				</h4>
+				<p class="chat-title-sub">
+					<a href="#">
+						<span class="glyphicon glyphicon-star-empty"></span>
+					</a>
+					<span class="chat-title-signature">威风凛凛的风度</span>
+				</p>
+			</div>
+			<div id="chat-content-chats">
+				<ul class="list-unstyled list-group" id="chat-content-chats-list">
+					<div class="text-center">
+						<span class="glyphicon glyphicon-time blue"></span>
+						<a href="#" id="chat-content-chats-more">查看更多消息</a>
+					</div>
+					<li class="list-group-item">
+						<p>
+							<span class="glyphicon glyphicon-leaf blue"></span>
+							<a href="#" class="chat-content-nickname">王自健</a>
+							<span class="chat-content-time">15:11:11</span>
+						</p>
+						<div class="chat-content-chat">
+							<p>你</p>
+							<p>看看这图片</p>
+							<img src="/img/room_1_1.jpg" alt="img" width="100px" height="100px">
+							<p>是什么</p>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<p>
+							<span class="glyphicon glyphicon-leaf blue"></span>
+							<a href="#" class="chat-content-nickname">ccccc</a>
+							<span class="chat-content-time">2015/12/20 17:57:34</span>
+						</p>
+						<div class="chat-content-chat">
+							<p>你</p>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<p>
+							<span class="glyphicon glyphicon-leaf blue"></span>
+							<a href="#" class="chat-content-nickname">王自健</a>
+							<span class="chat-content-time">2015/12/20 17:57:34</span>
+						</p>
+						<div class="chat-content-chat">
+							<p>什么</p>
+							<p>情况</p>
+						</div>
+					</li>
+				</ul>
+				<div id="chat-content-editBox">
+					<div class="btn-group dropup" id="chat-content-editBox-menu">
+						<span>
+							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-list-alt"></span>
+							</button>
+							<ol class="dropdown-menu" role="menu">
+								<li class="dropdown-header">快捷回复</li>
+								<li class="divider"></li>
+								<li>1. 谢谢你哈</li>
+								<li>2. 你好</li>
+								<li>3. 吃饭没</li>
+								<li>4. 天黑请闭眼</li>
+								<li>5. o.o 好了好了我知道了</li>
+							</ol>
+						</span>
+						
+						<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+							<span class="face"></span>
+							<span class="caret"></span>
+						</button>
+						<button type="button" class="btn btn-default btn-sm">
+							<span class="glyphicon glyphicon-picture"></span>
+						</button>
+						<table class="dropdown-menu" role="menu">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tfoot>
+								<tr>
+									<td class="yanbiaoqing">三</td>
+									<td class="qqbiaoqing">dsd</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					<div class="pull-right" id="chat-content-send">
+						<div class="btn-group dropup">
+							<button type="button" class="btn btn-info btn-sm">发送
+								<span class="glyphicon glyphicon-send"></span>
+							</button>
+							<button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<span class="glyphicon glyphicon-minus"></span>
+									<span>按Enter键发送消息</span>
+								</li>
+								<li>
+									<span class="glyphicon glyphicon-ok"></span>
+									<span>按Ctrl+Enter键发送消息</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div id="chat-content-editbox-edit" contentEditable>
+						
+					</div>
+				</div>
+			</div>
+			<div id="chat-content-userList">
+				<p>讨论组成员</p>
+				<ul class="list-unstyled">
+					<li>
+						<img src="/img/room_1_1.jpg" alt="头像" width="15px" height="15px">
+						<span class="">fengwuxiang</span>
+					</li>
+					<li class="chat-content-userList-acitve">
+						<img src="/img/room_1_1.jpg" alt="头像" width="15px" height="15px">
+						<span class="">fengwuxiang</span>
+					</li>
+					<li>
+						<img src="/img/room_1_1.jpg" alt="头像" width="15px" height="15px">
+						<span class="">fengwuxiang</span>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="/js/chat_list.js"></script>
+	</body>
+
+</html>

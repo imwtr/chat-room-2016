@@ -1,32 +1,6 @@
 
-.navbar-brand{
-	margin-top: -13px;
-	margin-right: 50px;
-}
-.navbar-form .input-group{
-	margin-left: 30px;
-}
-#search-menu {
-	margin-top: -10px;
-	margin-left: -2px;
-	min-width: 70px;
-}
-#search-menu a:hover,
-#user-menu a:hover {
-	background-color: #428bca;
-	color: #fff;
-}
 
-.login-state,
-.user-info {
-	margin-top: 10px;
-	margin-right: 50px;
-}
-.user-info .dropdown-menu {
-	margin-top: -20px;
-	margin-left: -2px;
-	min-width: 100px;
-}
+/* 左侧列表名 */
 .campus-logo {
 	margin-top: -425px;
 	margin-left: -10px;
@@ -40,6 +14,8 @@
 	cursor: pointer;
 	background-color: #ddf;
 }
+
+/* 聊天室列表 */
 #create-room {
 	margin-top: -8px;
 }
@@ -76,4 +52,257 @@
 	bottom: -10px;
 	font-size: 12px;
 	color: #fff;
+}
+
+/* 好友面板 */
+#user-friends-panel {
+	z-index: 200;
+	min-width: 210px;
+}
+.user-friends-panel-heading > h4{
+
+}
+.panel-search-form {
+	position: relative;
+	margin: 10px -15px;
+	border-top: 1px solid #bce8f1;
+}
+.panel-search-form input {
+	font-size: 12px;
+	background-color: #D9F2F7;
+	border: 1px solid #80E3F7;
+}
+.panel-search-close {
+	position: absolute;
+	display: inline-block;
+	right: 6%;
+	bottom: 16%;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 15px;
+	cursor: pointer;
+}
+.panel-search-close:hover {
+	color: #fff;
+	background-color: #5bc0de;
+}
+
+/* 好友面板主体部分 */
+.user-friends-body {
+	height: 500px;
+	overflow-y: scroll;
+}
+#user-friends-panel-menu {
+	margin-bottom: 0;
+	width: 100%;
+	text-align: center;
+}
+#user-friends-panel-menu li {
+	padding: 0;
+}
+
+/* 历史聊天记录列表 */
+#history-chat-list {
+	margin: -15px -15px;
+}
+#history-chat-list a {
+	padding-left: 5px;
+	padding-bottom: 5px;
+}
+#history-chat-list img {
+	margin-right: 5px;
+	width: 40px;
+	height: 40px;
+}
+.chat-list-nickname,
+.chat-list-data,
+.friends-list-nickname,
+.friends-list-signature,
+.discussion-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: break-all;
+    white-space: nowrap;
+}
+.chat-list-nickname {
+	margin-top: -3px;
+	width: 55%;
+}
+.chat-list-data,
+.friends-list-signature {
+	margin-top: -4px;
+	width: 65%;
+	
+	font-size: 12px;
+	color: #999;
+}
+.chat-list-time {
+	position: absolute;
+	top: 10%;
+	right: 5%;
+	font-size: 12px;
+	color: #999;
+}
+.chat-list-num-per {
+	margin-top: -30px;
+	background-color: #FB6E44;
+}
+
+/* 我的好友列表 */
+#friends-list {
+	margin: -5px -12px;
+	display: none;
+}
+#friends-list > li {
+	margin-bottom: 5px;
+	cursor: pointer;
+}
+#friends-list > li:hover {
+	background-color: #bce8f1;
+	border-radius: 3px;
+}
+#friends-list img {
+	margin-right: 5px;
+	width: 40px;
+	height: 40px;
+}
+.friends-list-nickname {
+	margin-top: 1px;
+	width: 55%;
+}
+
+/* 讨论组列表 */
+#discussions-list {
+	margin: -5px -15px;
+	display: none;
+}
+.discussion-name {
+	width: 50%;
+	font-size: 14px;
+}
+
+/* 浮窗聊天框容器 */
+#chat-wrapper {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 1000;
+	margin-top: -250px;
+	margin-left: -400px;
+	width: 800px;
+	height: 500px;
+	border: 3px solid #bce8f1;
+	border-radius: 5px;
+	background-color: #fff;
+}
+/* 浮窗聊天框左侧菜单 */
+#chat-left-menu {
+	float: left;
+	width: 180px;
+	height: 100%;
+	overflow-y: scroll;
+	background-color: rgba(80, 168, 187, 0.7);
+}
+#chat-left-menu li {
+	position: relative;
+	margin-top: 5px;
+	padding: 3px 5px;
+	border-radius: 5px;
+	color: #fff;
+}
+#chat-left-menu li:hover,
+#chat-left-menu .chat-item-active {
+	background-color: #bce8f1;
+	color: #000;
+}
+#chat-left-menu .chat-item-nickname {
+	display: inline-block;
+	cursor: default;
+	width: 8em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: break-all;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+#chat-left-menu .chat-item-info-num,
+#chat-left-menu .chat-item-close  {
+	position: absolute;
+	top: 25%;
+	right: 2%;
+	display: inline-block;
+}
+#chat-left-menu .chat-item-info-num {
+
+	background-color: #FB6E44;
+}
+#chat-left-menu .chat-item-close  {
+	display: none;
+	padding: 3px;
+	text-align: center;
+	line-height: 8px;
+	font-size: 1.3em;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	color: #fff;
+	background-color: #F55A56;
+	cursor: pointer;
+}
+
+/* 聊天窗口右侧内容框 */
+#chat-right-content {
+	float: left;
+	min-width: 614px;
+	height: 100%;
+	overflow: hidden;
+}
+#chat-right-content iframe {
+	min-width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+#chat-closeBtn {
+	position: absolute;
+	top: 2%;
+	right: 2%;
+	width: 30px;
+	height: 30px;
+	border: 1px solid #ddd;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 20px;
+	color: #fff;
+	opacity: 0.8;
+	background-color: #F55A56;
+}
+#chat-closeBtn:hover {
+	opacity: 1;
+}
+
+/* 注册登录modal */
+.login-another-way {
+	margin-top: 10px;
+	margin-left: 8%;
+}
+.modal-register-sex-wrapper {
+	margin-left: 5%;
+}
+.modal-register-sex-wrapper label:first-child:after,
+.modal-register-sex-wrapper label:last-child:after {
+	content: "";
+	margin-top: -8px;
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background-image: url(/img/sex.png);
+	background-size: 15px;
+}
+.modal-register-sex-wrapper label:first-child:after {
+	background-position: 0 0;
+}
+.modal-register-sex-wrapper label:last-child:after {
+	background-position: 0 -15px;
 }

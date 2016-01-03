@@ -2,7 +2,7 @@
  * 一些常用的函数方法封装
  */
 
-module.exports = Util;
+ // module.exports = Util;
 
 var Util = {
 	/**
@@ -321,14 +321,91 @@ var Util = {
 
 		if (val) {
 			var exp = new Date(),
-				exp.setMinutes(exp.getMinutes() - 1000),
 				path = path || '/';
+				exp.setMinutes(exp.getMinutes() - 1000);
+				
 
 			document.cookie = name + '=;expires=' + exp.toGMTString() +
 				(path ? ';path=' + path : '') +
 				(domain ? ';domain=' + domain : '') +
 				(secure ? ';secure' : '');
 		}
+	},
+	/**
+	 * 移动DOM对象节点
+	 * @param  {[type]} isFrame   curDom对象是否来自iframe
+	 * @param  {[type]} curDom    当前触发事件的dom对象
+	 * @param  {[type]} targetDom 触发移动操作后将要移动的dom对象
+	 */
+	bindObjsMove: function(isFrame, curDom, targetDom) {
+		function bindObjMove(curDom, targetDom) {
+			var curPos = diffPos = [];
+			curDom.onmousedown = function(e) {
+				e = e || window.event;
+				curPos = [
+					parseInt(targetDom.style.left, 10) ? parseInt(targetDom.style.left, 10) : 0,
+					parseInt(targetDom.style.top, 10) ? parseInt(targetDom.style.top, 10) : 0
+				];
+				diffPos = [
+					Util.getMousePosition(e)[0] - curPos[0],
+					Util.getMousePosition(e)[1] - curPos[1]
+				];
+
+				curDom.onmouseup = function() {
+					curDom.onmousemove = null;
+				};
+
+				curDom.onmousemove = function(e) {
+					try {
+						var e = e || window.event;
+						targetDom.style.left = (Util.getMousePosition(e)[0] - diffPos[0]) + 'px';
+						targetDom.style.top = Util.getMousePosition(e)[1] - diffPos[1] + 'px';
+					} catch (e) {
+						console.log(e);
+					}
+				}
+				return false;
+			};
+		}
+
+		var curDomTemp = curDom;
+		targetDom = typeof targetDom === 'string' ? document.getElementById(targetDom) : targetDom;
+		curDom = typeof curDom === 'string' ? document.getElementById(curDom) : curDom;
+
+		// 如果是iframe内嵌的目标
+		if (isFrame) {
+			var $frameWin = $('.chat-content-frame');
+			for (var i = 0, j = $frameWin.length; i < j; i++) {
+				bindObjMove($frameWin[i].contentWindow.document.getElementById(curDomTemp), targetDom);
+			}
+		} else {
+			bindObjMove(curDom, targetDom);
+		}
+		
+	},
+
+	/* 获取鼠标坐标 */
+	getMousePosition: function(e) {
+		e = e || window.event;
+		var pos = [];
+
+		if (typeof e.pageX != 'undefined') {
+			pos = [e.pageX, e.pageY];
+		} else if (typeof e.clientX != 'undefined') {
+			pos = [e.clientX + Util.getScrollPosition()[0], e.clientY + Util.getScrollPosition()[1]];
+		}
+
+		return pos;
+	},
+
+	/* 获取滚动条位置 */
+	getScrollPosition: function(e) {
+		var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		return [
+			scrollLeft ? scrollLeft : 0,
+			scrollTop ? scrollTop : 0
+		];
 	}
 		
 };
