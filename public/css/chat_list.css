@@ -10,16 +10,25 @@ body {
 .blue {
 	color: #428bca;
 }
+.user-login-state {
+	font-size: 12px;
+}
+
 /* 主题 说明  签名 */
 #chat-content-title {
-	margin-top: -10px;
 	padding: 10px 0 0 10px;
 	border-bottom: 1px solid #ddd;
 	border-radius: 3px;
+	min-height: 60px;
 	background-color: #bce8f1;
 	cursor: move;
 }
+
 .chat-title-signature {
+	display: inline-block;
+	overflow: hidden;
+	max-width: 300px;
+	height: 15px;
 	font-size: 12px;
 }
 .chat-title {
@@ -41,6 +50,22 @@ body {
 #chat-content-chats-list li {
 	border: none;
 }
+.chat-content-time {
+	margin-left: 10px;
+	color: blue;
+}
+#room-info-content p,
+#chat-content-chats-list p {
+	margin: 3px;
+}
+.sys-msg {
+	padding: 1px 10px;
+	background: #bbb;
+	border: 1px solid #fff;
+	border-radius: 5px;
+	color: #fff;
+
+}
 /* 讨论组用户列表 */
 #chat-content-userList {
 	float: left;
@@ -49,13 +74,17 @@ body {
 	overflow-y: scroll;
 	font-size: 12px;
 }
-#chat-content-userList > p {
+#chat-content-userList-chat > div > p,
+#chat-content-userList > div > p {
 	padding: 5px;
 	border-bottom: 1px solid #ddd;
 }
+#chat-content-userList-chat li,
 #chat-content-userList li {
 	margin-top: 1px;
 }
+#chat-content-userList-chat li > span:hover,
+#chat-content-userList-chat li:hover,
 #chat-content-userList li > span:hover,
 #chat-content-userList li:hover {
 	cursor: default;
@@ -64,13 +93,29 @@ body {
 .chat-content-userList-acitve {
 	background-color: #ddd;
 }
+#chat-content-userList-chat li + .popover p,
+#chat-content-userList li + .popover p {
+	margin: 3px;
+}
 /* 消息编辑框容器 */
 #chat-content-editBox {
+	position: relative;
 	margin-top: -20px;
 	height: 300px;
 	border: 1px solid #ddd;	
 }
-
+/* 当编辑框不可用时，则显示此掩层 */
+#editBox-menu-cover {
+	position: absolute;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	width: 120px;
+	height: 30px;
+	background: #fff;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
 #chat-content-editBox-menu li {
 	padding-left: 5px;
 	font-size: 12px;
@@ -89,10 +134,7 @@ body {
 	height: 21px;
 	background: url(/img/face0.png) center center no-repeat;
 }
-#chat-content-editBox-menu td {
-	padding: 10px;
-	background: url(/img/face0.png) center center no-repeat;
-}
+
 #chat-content-editBox-menu td:hover {
 	background-color: #ddd;
 }
@@ -101,6 +143,39 @@ body {
 }
 #chat-content-editBox-menu button:hover {
 	border: 1px solid #ddd;
+}
+
+#emotion-div {
+	width: 300px;
+	height: 242px;
+	padding-bottom: 0;
+}
+#emotion-wrap {
+	overflow: scroll;
+	width: 300px;
+	height: 200px;
+}
+#emotion-wrap > table {
+	display: none;
+	border-collapse: collapse;
+}
+#emotion-wrap > table:first-child {
+	display: block;
+}
+#emotion-wrap > table td {
+	padding: 5px;
+	border: 1px solid #aaa;
+}
+#emotion-div ul {
+	margin-left: 10px;
+	margin-bottom: 0;
+}
+#emotion-div li {
+	padding: 5px;
+	min-width: 34px;
+}
+#emotion-div li.active {
+	background-color: #ddd;
 }
 #chat-content-send li:hover {
 	background-color: #ddd;

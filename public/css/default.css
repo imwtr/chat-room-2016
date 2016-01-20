@@ -2,4 +2,34 @@
 
 header,nav,section,article,aside,dialog,figure,menu,footer{display:block;}
 h1,h2,h3,h4,h5,h6{font-weight:700}
+body {
+	min-width: 380px;
+}
 
+@media (max-width: 765px) {
+	.navbar-header + div {
+		margin-top: 30px;
+		margin-left: 30px;
+	}
+	.navbar-nav > li:last-child,
+	.navbar-form {
+		display: none;
+	}
+}
+@media (max-width: 988px) {
+	#campus-list-wrap img {
+		display: none;
+	}
+}
+
+.navbar-nav > li:last-child,
+.navbar-form {
+	/*display: none;*/
+	visibility: hidden;
+}
+#user-friends-panel form {
+	display: none;
+}
+#user-friends-panel h4 {
+	margin-bottom: 15px;
+}

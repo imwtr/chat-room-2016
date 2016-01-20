@@ -10,13 +10,22 @@ var session = require('express-session');
 
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var login_register = require('./routes/login_register');
+var friends_panel = require('./routes/friends_panel');
+var room_list = require('./routes/room_list');
+var chat_list = require('./routes/chat_list');
+var user = require('./routes/user');
 var cfg = require('./cfg');
 
+
+
+
+global.Util = require('./public/js/Util');
+
 // 全局model操作器 
-global.modelHandle = require('./dbs/modelHandle');
+global.modelHandle = require('./dbs/getModel').getModel;
 // 全局数据库对象
-console.log(cfg.server.uri);
+console.log('db-uri: ' + cfg.server.uri);
 global.db = mongoose.connect(cfg.server.uri);
 
 var app = express();
@@ -43,9 +52,20 @@ app.use(multer());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/login_register', function(req, res, next) {
+  res.sendFile(path.join(__dirname, 'views/login_register.html'));
+})
+.get('/friends_panel', function(req, res, next) {
+  res.sendFile(path.join(__dirname, 'views/friends_panel.html'));
+});
+
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/', login_register);
+app.use('/', friends_panel);
+app.use('/', room_list);
+app.use('/', chat_list);
+app.use('/', user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

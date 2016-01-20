@@ -15,7 +15,11 @@ module.exports = {
 	 * @param  {[model name]}
 	 * @return {[model object]}
 	 */
-	getModel: function(type) {
-		return mongoose.model(type);
+	getModel: function(type){ 
+		return _getModel(type);
 	}
+};
+
+var _getModel = function(type){ 
+	return mongoose.model(type);
 };

@@ -1,0 +1,85 @@
+
+#user-set,
+#user-msg {
+	display: none;
+}
+
+#img-wrap {
+	position: relative;
+}
+#img-info {
+	margin-right: 50px;
+	margin-bottom: 10px;
+}
+.user-set-tip,
+.user-info-tip {
+	padding: 3px;
+	text-align: center;
+	font-size: 12px;
+}
+.user-set-tip span,
+.user-info-tip span {
+	margin-left: 5px;
+	cursor: pointer;
+}
+#img-change-btn {
+	display: inline-block;
+	position: absolute;
+	bottom: 10px;
+	left: 0;
+	width: 100px;
+	text-align: center;
+	background: #000;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	font-size: 12px;
+	color: #fff;
+	cursor: pointer;
+}
+#img-change-ok span {
+	color: #fff;
+}
+#img-change-wrap {
+	display: none;
+}
+#changeImg-form {
+	display: none;
+}
+
+#img-change-preview {
+	margin-top: -11px;
+	margin-left: 5px;
+}
+#user-info > p {
+	padding-left: 0;
+}
+#user-info .glyphicon-ok,
+#user-info .glyphicon-pencil {
+	color: #5bc0de;
+	cursor: pointer;
+}
+#img-change-ok .glyphicon-ok {
+	color: #fff;
+}
+#sex-info,
+#sex-radio-wrap label:first-child:after,
+#sex-radio-wrap label:last-child:after {
+	content: "";
+	margin-top: -8px;
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background-image: url(/img/sex.png);
+	background-size: 15px;
+}
+#sex-radio-wrap label:first-child:after {
+	background-position: 0 0;
+}
+#sex-radio-wrap label:last-child:after {
+	background-position: 0 -15px;
+}
+
+#user-set button {
+	width: 90px;
+	font-weight: 700;
+}

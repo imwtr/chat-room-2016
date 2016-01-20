@@ -1,20 +1,46 @@
+.my-container {
+	padding-right: 20px;
+	padding-left: 20px;
+}
 
-
+.login-state,
+.user-info {
+	display: none;
+}
+.user-login-state {
+	font-size: 12px;
+}
 /* 左侧列表名 */
 .campus-logo {
 	margin-top: -425px;
 	margin-left: -10px;
 }
+#userzone-menu li,
 .campus-list li {
 	padding-top: 10px;
+	padding-right: 5px;
 	padding-bottom: 5px;
 	border-bottom: 1px dotted #ccc;
+	border-radius: 5px;
+}
+#userzone-menu li {
+	padding-left: 5px;
 }
 .campus-list li:hover {
+	cursor: default;
+	background-color: #EAEAF9;
+}
+#userzone-menu li:hover {
 	cursor: pointer;
+	background-color: #EAEAF9;
+}
+#userzone-menu li.active,
+.campus-list li.active {
 	background-color: #ddf;
 }
-
+.campus-list span {
+	color: #aaa;
+}
 /* 聊天室列表 */
 #create-room {
 	margin-top: -8px;
@@ -29,8 +55,8 @@
 .room-logo {
 	position: relative;
 	display: inline-block;
-	width: 130px;
-	height: 130px;
+	width: 100%;
+	height: 100%;
 	overflow: hidden;
 }
 .room-logo img:hover {
@@ -54,7 +80,20 @@
 	color: #fff;
 }
 
+/* 分页栏 */
+
+#page-go {
+	display: inline-block;
+	margin-left: 5px;
+	width: 100px;
+}
+#page-go input {
+	width: 50px;
+}
 /* 好友面板 */
+#user-friends-panel h4 span {
+	cursor: pointer;
+}
 #user-friends-panel {
 	z-index: 200;
 	min-width: 210px;
@@ -88,10 +127,44 @@
 	color: #fff;
 	background-color: #5bc0de;
 }
+/* 创建房间 */
+#create-room-alert {
+	display: none;
+	padding: 5px;
+	margin-left: 30%;
+	margin-bottom: 0;
+}
+#c-room-logo {
+	display: none;
+}
+#c-room-logo-preview,
+#c-room-logo-div {
+	float: left;
+	width: 50px;
+	height: 50px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	color: #ccc;
+	font-size: 36px;
+	text-align: center;
+	cursor: pointer;
+}
+#c-room-logo-preview {
+	display: none;
+	margin-left: 10px;
+}
+#c-room-logo-preview img {
+	width: 50px;
+	height: 50px;
+}
+#c-room-logo-div:hover {
+	background-color: #ddf;
+	color: #fff;
+}
 
 /* 好友面板主体部分 */
 .user-friends-body {
-	height: 500px;
+	height: 430px;
 	overflow-y: scroll;
 }
 #user-friends-panel-menu {
@@ -120,7 +193,9 @@
 .chat-list-data,
 .friends-list-nickname,
 .friends-list-signature,
-.discussion-name {
+.group-name,
+.group-last-msg,
+#chat-content-title-cover h4 {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	word-break: break-all;
@@ -156,8 +231,16 @@
 	display: none;
 }
 #friends-list > li {
-	margin-bottom: 5px;
+	position: relative;
+	border-bottom: 1px solid #ddf;
+	cursor: default;
+}
+#friends-list > ul > li {
 	cursor: pointer;
+}
+#friends-list > ul > div {
+	overflow: scroll;
+	position: relative;
 }
 #friends-list > li:hover {
 	background-color: #bce8f1;
@@ -172,15 +255,64 @@
 	margin-top: 1px;
 	width: 55%;
 }
+.friends-list-group-rename {
+	position: absolute;
+	top: 2px;
+	right: 5px;
+	cursor: pointer;
+}
 
+input.friends-list-group-name {
+	width: 110px;
+}
+.friends-list-group-rename:hover {
+	color: #269abc;
+}
+.friends-list-user {
+	font-size: 12px;
+	background: #fff;
+}
+.friends-list-user a:nth-child(even) {
+	margin-left: 10px;
+}
+.friends-list-group-summary {
+	margin-left: 7px;
+}
 /* 讨论组列表 */
-#discussions-list {
+#group-list {
 	margin: -5px -15px;
 	display: none;
+	font-size: 12px;
 }
-.discussion-name {
-	width: 50%;
-	font-size: 14px;
+#group-list img {
+	position: absolute;
+}
+#group-list p {
+	margin-bottom: 0;
+	margin-left: 45px;
+}
+#group-list > li {
+	min-height: 60px;
+}
+#group-list li:hover {
+	background: #F1F1F1;
+	cursor: pointer;
+}
+.group-name {
+	display: inline-block;
+	width: 70%;
+	font-weight: 700;
+}
+.group-num-per {
+	display: inline-block;
+	margin-top: -10px;
+	color: #666;
+}
+.group-last-msg-user {
+	font-weight: 700;
+}
+.group-last-msg {
+	width: 80%;
 }
 
 /* 浮窗聊天框容器 */
@@ -189,10 +321,10 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	z-index: 1000;
+	z-index: 10000;
 	margin-top: -250px;
 	margin-left: -400px;
-	width: 800px;
+	width: 620px;
 	height: 500px;
 	border: 3px solid #bce8f1;
 	border-radius: 5px;
@@ -200,6 +332,7 @@
 }
 /* 浮窗聊天框左侧菜单 */
 #chat-left-menu {
+	display: none;
 	float: left;
 	width: 180px;
 	height: 100%;
@@ -213,7 +346,10 @@
 	border-radius: 5px;
 	color: #fff;
 }
-#chat-left-menu li:hover,
+#chat-left-menu li:hover {
+	background-color: #A5D6E0;
+	color: #000;
+}
 #chat-left-menu .chat-item-active {
 	background-color: #bce8f1;
 	color: #000;
@@ -236,20 +372,22 @@
 	display: inline-block;
 }
 #chat-left-menu .chat-item-info-num {
-
 	background-color: #FB6E44;
 }
 #chat-left-menu .chat-item-close  {
 	display: none;
 	padding: 3px;
 	text-align: center;
-	line-height: 8px;
+	line-height: 10px;
 	font-size: 1.3em;
 	border: 1px solid #fff;
 	border-radius: 50%;
 	color: #fff;
-	background-color: #F55A56;
+	background-color: rgba(8, 8, 8, 0.5);
 	cursor: pointer;
+}
+#chat-left-menu .chat-item-close:hover {
+	background-color: #F55A56;
 }
 
 /* 聊天窗口右侧内容框 */
@@ -258,51 +396,83 @@
 	min-width: 614px;
 	height: 100%;
 	overflow: hidden;
+	border: 3px solid rgba(80, 168, 187, 0.5);
+	border-radius: 5px;
 }
 #chat-right-content iframe {
 	min-width: 100%;
 	height: 100%;
 	overflow: hidden;
 }
+#chat-content-title-cover {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	padding-left: 10px;
+	width: 608px;
+	height: 59px;
+	background: #bce8f1;
+	cursor: move;
+}
+#chat-content-title-cover img {
+	float: left;
+	margin-top: 10px;
+	margin-right: 5px;
+	border-radius: 3px;
+}
+#chat-content-title-cover h4 {
+	margin-bottom: 0;
+	max-width: 85%;
+
+}
+#chat-title-sub {
+	margin-top: 3px;
+	font-size: 12px;
+}
 #chat-closeBtn {
 	position: absolute;
 	top: 2%;
 	right: 2%;
-	width: 30px;
-	height: 30px;
 	border: 1px solid #ddd;
 	border-radius: 50%;
 	text-align: center;
-	font-size: 20px;
+	line-height: 25px;
+	font-size: 25px;
 	color: #fff;
-	opacity: 0.8;
-	background-color: #F55A56;
+	
+	background-color: rgba(80, 168, 187, 0.3);
 }
 #chat-closeBtn:hover {
-	opacity: 1;
+	background-color: #F55A56;
+	opacity: 0.6;
+}
+#chat-content-userList-chat {
+	position: absolute;
+	overflow-y: scroll;
+	top: 62px;
+	right: 0;
+	width: 154px;
+	height: 428px;
+	font-size: 12px;
+}
+#chat-content-userList-chat li {
+	cursor: pointer;
 }
 
-/* 注册登录modal */
-.login-another-way {
-	margin-top: 10px;
-	margin-left: 8%;
+
+#registerlogin-modal,
+#tips-div,
+#tips-delete-friend,
+#tips-choose-group,
+#tips-choose-userGroup,
+#create-room-modal {
+	z-index: 12000;
 }
-.modal-register-sex-wrapper {
-	margin-left: 5%;
-}
-.modal-register-sex-wrapper label:first-child:after,
-.modal-register-sex-wrapper label:last-child:after {
-	content: "";
-	margin-top: -8px;
-	display: inline-block;
-	width: 15px;
-	height: 15px;
-	background-image: url(/img/sex.png);
-	background-size: 15px;
-}
-.modal-register-sex-wrapper label:first-child:after {
-	background-position: 0 0;
-}
-.modal-register-sex-wrapper label:last-child:after {
-	background-position: 0 -15px;
+#registerlogin-modal .modal-header,
+#tips-div .modal-header,
+#tips-delete-friend .modal-header,
+#tips-choose-group .modal-header,
+#tips-choose-userGroup .modal-header,
+#create-room-modal .modal-header {
+	cursor: move;
 }

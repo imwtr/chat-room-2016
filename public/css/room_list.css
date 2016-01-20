@@ -8,3 +8,36 @@
 #chat-content-editBox {
 	min-height: 500px;
 }
+
+#room-info {
+	
+}
+#room-info-content {
+	margin-top: 40px;
+	font-size: 12px;
+}
+#room-info-content .bold {
+	font-weight: 700;
+}
+#room-info-content .grey {
+	color: #666;
+}
+
+/* 讨论组选择 */
+#modal-group-list .radio,
+#tips-choose-userGroup .radio {
+	overflow: hidden;
+	padding: 5px;
+	color: #333;
+	border-radius: 3px;
+}
+#modal-group-list .radio:hover,
+#tips-choose-userGroup .radio:hover {
+	background-color: #BFE3F5;
+}
+
+#new-userGroup-input {
+	max-width: 150px;
+	margin-right: 10px;
+	font-size: 12px;
+}

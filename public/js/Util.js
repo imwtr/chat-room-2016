@@ -2,7 +2,7 @@
  * 一些常用的函数方法封装
  */
 
- // module.exports = Util;
+
 
 var Util = {
 	/**
@@ -205,9 +205,9 @@ var Util = {
 	},
 	// 获取url参数对应值
 	getArgValue: function(arg) {
-		var search = location.href.slice(location.href.indexOf('?'));
+		var search = location.href.slice(location.href.indexOf('?') + 1);
 		if (!search) {
-			return;
+			return null;
 		}
 
 		var items = search.split('&');
@@ -219,7 +219,7 @@ var Util = {
 			} 
 		}
 
-		return '';
+		return null;
 	},
 	// xss 过滤
 	xss: function(str, type) {
@@ -271,6 +271,81 @@ var Util = {
                 }).replace(/ /g, '&nbsp;').replace(/\r\n/g, '<br />').replace(/\n/g,'<br />').replace(/\r/g,'<br />');
             	break; 
 		}
+	},
+	// html解码
+	decodeHtml: function(content) {
+		if (content == null) {
+			return '';
+		}
+
+		return Util.strReplace(content, {
+			"&amp;" : '&',
+            "&quot;" : '\"',
+            "\\'" : '\'',
+            "&lt;" : '<',
+            "&gt;" : '>',
+            "&nbsp;" : ' ',
+            "&#39;" : '\'',
+            "&#09;" : '\t',
+            "&#40;" : '(',
+            "&#41;" : ')',
+            "&#42;" : '*',
+            "&#43;" : '+',
+            "&#44;" : ',',
+            "&#45;" : '-',
+            "&#46;" : '.',
+            "&#47;" : '/',
+            "&#63;" : '?',
+            "&#92;" : '\\',
+            "<BR>" : '\n'
+		});
+	},
+
+	// 字符串替换
+	strReplace: function(str, re, rt) {
+		if (rt != undefined) {
+			replace(re, rt);
+		} else {
+			for (var key in re) {
+				replace(key, re[key]);
+			}
+		}
+
+		function replace(a, b) {
+			var arr = str.split(a);
+			str = arr.join(b);
+		}
+
+		return str;
+	},
+
+	// 格式化时间
+	formatDate: function(date, formatStr) {
+		var arrWeek = ['日','一','二','三','四','五','六'];
+       
+        var str = formatStr.replace(/yyyy|YYYY/, date.getFullYear())
+                .replace(/yy|YY/, Util.addZero(date.getFullYear() % 100, 2) )
+                .replace(/mm|MM/, Util.addZero(date.getMonth() + 1, 2))
+                .replace(/m|M/g, date.getMonth() + 1)
+                .replace(/dd|DD/, Util.addZero(date.getDate(), 2) )
+                .replace(/d|D/g, date.getDate())
+                .replace(/hh|HH/, Util.addZero(date.getHours(), 2))
+                .replace(/h|H/g, date.getHours())
+                .replace(/ii|II/, Util.addZero(date.getMinutes(), 2))
+                .replace(/i|I/g, date.getMinutes())
+                .replace(/ss|SS/, Util.addZero(date.getSeconds(), 2))
+                .replace(/s|S/g, date.getSeconds())
+                .replace(/w/g, date.getDay())
+                .replace(/W/g, arrWeek[date.getDay()]);
+        return str;
+	},
+
+	// 前补0
+	addZero: function(v, size) {
+		for(var i = 0,len = size - (v + '').length; i < len; i++) {
+            v = '0' + v;
+        }
+        return v + '';
 	},
 	/**
 	 * 根据cookie名称获取相应值
@@ -331,57 +406,50 @@ var Util = {
 				(secure ? ';secure' : '');
 		}
 	},
+
 	/**
 	 * 移动DOM对象节点
-	 * @param  {[type]} isFrame   curDom对象是否来自iframe
 	 * @param  {[type]} curDom    当前触发事件的dom对象
 	 * @param  {[type]} targetDom 触发移动操作后将要移动的dom对象
 	 */
-	bindObjsMove: function(isFrame, curDom, targetDom) {
-		function bindObjMove(curDom, targetDom) {
-			var curPos = diffPos = [];
-			curDom.onmousedown = function(e) {
-				e = e || window.event;
-				curPos = [
-					parseInt(targetDom.style.left, 10) ? parseInt(targetDom.style.left, 10) : 0,
-					parseInt(targetDom.style.top, 10) ? parseInt(targetDom.style.top, 10) : 0
-				];
-				diffPos = [
-					Util.getMousePosition(e)[0] - curPos[0],
-					Util.getMousePosition(e)[1] - curPos[1]
-				];
-
-				curDom.onmouseup = function() {
-					curDom.onmousemove = null;
-				};
-
-				curDom.onmousemove = function(e) {
-					try {
-						var e = e || window.event;
-						targetDom.style.left = (Util.getMousePosition(e)[0] - diffPos[0]) + 'px';
-						targetDom.style.top = Util.getMousePosition(e)[1] - diffPos[1] + 'px';
-					} catch (e) {
-						console.log(e);
-					}
-				}
-				return false;
-			};
+	bindObjMove: function(curDom, targetDom, tag) {
+		if (!curDom || !targetDom) {
+			return;
 		}
+		var curPos = diffPos = [];
 
-		var curDomTemp = curDom;
-		targetDom = typeof targetDom === 'string' ? document.getElementById(targetDom) : targetDom;
-		curDom = typeof curDom === 'string' ? document.getElementById(curDom) : curDom;
-
-		// 如果是iframe内嵌的目标
-		if (isFrame) {
-			var $frameWin = $('.chat-content-frame');
-			for (var i = 0, j = $frameWin.length; i < j; i++) {
-				bindObjMove($frameWin[i].contentWindow.document.getElementById(curDomTemp), targetDom);
-			}
-		} else {
-			bindObjMove(curDom, targetDom);
-		}
+		curDom.onmousedown = function(e) {
+			e = e || window.event;
+			curPos = [
+				targetDom.offsetLeft,
+				targetDom.offsetTop
+				// parseInt(targetDom.style.left, 10) ? parseInt(targetDom.style.left, 10) : 0,
+				// parseInt(targetDom.style.top, 10) ? parseInt(targetDom.style.top, 10) : 0
+			];
 		
+			diffPos = [
+				Util.getMousePosition(e)[0] - curPos[0],
+				Util.getMousePosition(e)[1] - curPos[1]
+			];
+			curDom.onmouseup = function() {
+				curDom.onmousemove = null;
+			};
+			curDom.onmousemove = function(e) {
+				try {
+					var e = e || window.event;
+					if (tag === 'modal') {
+						targetDom.style.position = 'absolute';
+					}
+					targetDom.style.marginLeft = '0px';
+					targetDom.style.marginTop = '0px';
+					targetDom.style.left = (Util.getMousePosition(e)[0] - diffPos[0]) + 'px';
+					targetDom.style.top = Util.getMousePosition(e)[1] - diffPos[1] + 'px';
+				} catch (e) {
+					console.log(e);
+				}
+			};
+			return false;
+		};	
 	},
 
 	/* 获取鼠标坐标 */
@@ -409,3 +477,9 @@ var Util = {
 	}
 		
 };
+
+try {
+	module.exports = Util;
+} catch (e) {
+	
+}

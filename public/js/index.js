@@ -1,185 +1,279 @@
+/**
+ * [getRoomsList 加载房间列表]
+ * @param  {[type]} pn   [页码]
+ * @param  {[type]} area [分类]
+ * @return {[type]}      [description]
+ */
+function getRoomsList(pn, area) {
+	var $panelBody = $('#room-list-wrap').find('.panel-body');
+	var temp = ['<div class="row">'];
+	// 按分类获取的url 默认获取热门房间
+	var url = area 
+		? '/getRoomsList/:pn=' + pn + '/:tag=' + area 
+		: '/getRoomsList/:pn=' + pn + '/:tag=hot';	$.ajax({
+		type: 'get',
+		url: url,
+		success: function(data) {
+			var pSize = 12;
+			var pTotal = Math.ceil(data.rTotal / pSize);	
+			data = data.rooms;
+			
+			for (var i = 0, j = data.length; i < j; i++) {				
+							
+				var popoverIDContent = '<p style="font-weight:700;">所属：</p><p>' + data[i].aName + '</p>' +
+									'<p style="font-weight:700;" class="hide">当前/总会员：</p><p class="hide">' + data[i].rCurCount + '/' + data[i].rTotalCount + '</p></p>' +
+									'<p style="font-weight:700;" class="hide">最后活跃：</p><p class="hide">' + data[i].rLastTime + '</p>';
+					popoverIDContent = popoverIDContent.replace(/\"/g, '&quot;');	
+				// 根据用户是否在线选择是否禁用相应按钮
+				var btnDisabled = (data[i].uLoginState === 'down' ? 'disabled' : '');
+				// 判断该用户是否为好友
+				var beFriends = data[i].uIsFriends ? 'hide' : '';
+				var isFriends = data[i].uIsFriends ? '' : 'hide';
+				var isFriend = data[i].uIsFriends ? 1 : 0;
+				var isSelf = data[i].uIsSelf;
+				// 房主
+				var popoverOwnerContent = '<p class="user-login-state">当前：' + (data[i].uLoginState === 'down' ? '不' : '') + '在线</p>' +
+											'<p>' +
+												'<span style="background-position:0 ' + (data[i].uSex === 'girl' ? '-15' : '0') + 'px;" data-sex="' + data[i].uSex + '" class="popover-sex"></span>' +
+												'<a href="/user?id=' + data[i].rOwnerId + '" data-isFriends="' + isFriend + '">' + data[i].uNickName + '</a></p>' +
+										'<p><button data-tag="private" type="button" class="btn btn-info btn-xs ' + btnDisabled + '"><span class="glyphicon glyphicon-earphone"></span> 私信给TA</button></p>' +
+										'<p><button data-tag="friend" data-act="1" type="button" class="btn btn-primary btn-xs {be ' + beFriends + ' eb}"><span class="glyphicon glyphicon-plus"></span> 加为好友</button></p>' +
+										'<p><button data-tag="friend" data-act="0" type="button" class="btn btn-warning btn-xs {is ' + isFriends + ' si}"><span class="glyphicon glyphicon-remove"></span> 删除好友</button></p>' +
+										'<p><button data-tag="group" type="button" class="btn btn-info btn-xs ' + btnDisabled + '"><span class="glyphicon glyphicon-earphone"></span> 讨论组</button></p>';
+					popoverOwnerContent = popoverOwnerContent.replace(/\"/g, '&quot;');
+					// 如果是自己  则其他项无需显示
+					if (isSelf) {
+						popoverOwnerContent = '这是你自己';
+					}					
+			
+				temp.push('<div class="col-sm-3">' +
+								'<div class="text-center">' +
+									'<h6 title="' + data[i].rName + '">' + data[i].rName + '</h6>' +
+									'<a data-rId="' + data[i].rId + '" href="/room?id=' + data[i].rId + '" class="room-logo">' +
+										'<img src="' + data[i].rImage + '" alt="room" width="100%" height="100%">' +
+										'<p class="room-user-num-wrap">' +
+											'<span class="hide">统计：</span>' +
+											'<span class="room-user-num">' + data[i].rCurCount + '</span>人在线' +
+										'</p>' +
+									'</a>' +
+									'<div class="caption room-info">' +
+										'<p>房号: <span class="room-id" data-toggle="popover" data-content="' + popoverIDContent + '"><a href="/room?id=' + data[i].rId + '">' + data[i].rId + '</a></span></p>' +
+										'<p>房主： <span class="room-owner" data-toggle="popover" data-content="' + popoverOwnerContent + '"><a href="#">' + data[i].uNickName + '</a></span></p>' +
+									'</div>' +
+								'</div>' +
+							'</div>');
+			}
+			temp.push('</div>');
+			$panelBody.html(temp.join(''));			
 
-// 搜索条件选择
-$('#search-menu').click(function(e) {
-	var node = e.target || e.srcElement;
-	var condition;
-	var li;
+			// 调整房间logo大小   防止宽高不一致
+			$(window).resize(function(){
+				$('.room-logo').each(function() {
+					var width = $(this).width();
+					$(this).height(width * 0.8);
+				});
+			});
+			$(window).resize();			
 
-	if (node.nodeName === 'A') {
-		li = $(node.parentNode);
-		condition = li.attr('data-val');
-		li.addClass('active').siblings('li').removeClass('active');
+			// 信息弹出框提示配置
+			$('.room-id').popover({
+				trigger: 'hover',
+				html: true,
+				title: '房间信息',
+				placement: 'top'
+			});			
 
-		$('#search-condition').html(condition + '<span class="caret"></span>');
-		$('#search-input').attr('placeholder', condition === '不限' ? '搜索' : '搜索' + condition);
-	}
+			$('.room-owner').popover({
+				trigger: 'click',
+				html: true,
+				title: 'TA的资料',
+				placement: 'bottom'
+			});			
 
-});
+			// 渲染分页栏  根据当前pn配置左右页值（中间显示5项）
+			if (pn < 1 || pn > pTotal) {
+				console.log('Wrong page number!');
+				return;
+			}			
+			var $pageBarUl = $('#page-bar').find('ul');
+			var prevIsDisabled = (pn === 1) ? 'disabled' : '';
+			var nextIsDisabled = (pn === pTotal) ? 'disabled' : '';
+			// 第一项为上一页
+			temp = ['<li class="' + prevIsDisabled + '">' +
+						'<a href="javascript:getRoomsList(' + (pn - 1) + ',' + area + ')">&lt;</a>' +
+					'</li>'];
 
-// 根据条件进行搜索
-$('#search-btn').click(searchByInput);
-$('form[name="search-form"]').submit(searchByInput);
-
-function searchByInput(e) {
-	var node = e.target || e.srcElement;
-
-	if (node.nodeName !== 'BUTTON') {
-		e.preventDefault();
-	}
-
-	var inputVal = $.trim($('#search-input').val());
-	var condition = $.trim($('#search-condition').text());
-	var tag = {
-		'不限': 10,
-		'房名': 1,
-		'房号': 2,
-		'昵称': 3
-	};
-
-	if (inputVal === '' || !tag[condition]) {
-		return;
-	}
-
-	location = '/search?tag=' + tag[condition] + '&w=' + encodeURIComponent(inputVal);
-
+			// 5页以下直接展示
+			if (pTotal <= 5) {
+				var rEdge = (pTotal < 5) ? pTotal : 5;
+				for (var i = 1; i <= rEdge; i++) {
+					var isActive = (i === pn) ? 'active' : '';
+					temp.push('<li class="' + isActive + '">' +
+								'<a href="javascript:getRoomsList(' + i + ',' + area + ')">' + i + '</a>' +
+							'</li>');
+				}
+			} 
+			// 否则进一步判断左右页如何设置
+			else {
+				// 如果当前页距首页 < 2 则末页显示 ...pTotal
+				if (pn <= 3) {
+					for (var i = 1; i <= 5; i++) {
+						var isActive = (i === pn) ? 'active' : '';
+						temp.push('<li class="' + isActive + '">' +
+									'<a href="javascript:getRoomsList(' + i + ',' + area + ')">' + i + '</a>' +
+								'</li>');
+					}
+					temp.push('<li class="">' +
+									'<a href="javascript:getRoomsList(' + pTotal + ',' + area + ')">...' + pTotal + '</a>' +
+								'</li>');
+				}
+				// 如果当前页距首页 > 3 则首页显示 1...
+				if (pn >= 4) {
+					var rEdge = (pn + 2 > pTotal ? pTotal : pn + 2);
+					var lEdge = rEdge - 5 + 1;
+					// 首页
+					temp.push('<li class="">' +
+									'<a href="javascript:getRoomsList(1,' + area + ')">1...</a>' +
+								'</li>');
+					// 中间部分
+					for (var i = lEdge; i <= rEdge; i++) {
+						var isActive = (i === pn) ? 'active' : '';
+						temp.push('<li class="' + isActive + '">' +
+									'<a href="javascript:getRoomsList(' + i + ',' + area + ')">' + i + '</a>' +
+								'</li>');
+					}
+					// 末页（如果有）
+					if (rEdge < pTotal) {
+						temp.push('<li class="">' +
+									'<a href="javascript:getRoomsList(' + pTotal + ',' + area + ')">...' + pTotal + '</a>' +
+								'</li>');
+					}
+				}
+			}			// 最后一项为下一页&跳页
+			temp.push('<li class="' + nextIsDisabled + '">' +
+						'<a href="javascript:getRoomsList(' + (pn + 1) + ',' + area + ')">&gt;</a>' +
+					'</li>' +
+					'<li>' +
+						'<div class="input-group" id="page-go">' +
+							'<input type="text" class="form-control">' +
+							'<span class="input-group-btn">' +
+								'<button type="button" class="btn btn-default">Go</button>' +
+							'</span>' +
+						'</div>' +
+					'</li>');
+			$pageBarUl.html(temp.join(''));			// 跳页事件绑定
+			$('#page-go').find('button').click(function() {
+				var value = parseInt($('#page-go').find('input').val(), 10);
+				if (!value) {
+					return;
+				}
+				if (value < 1) {
+					getRoomsList(1, area);
+				} else if (value > pTotal){
+					getRoomsList(pTotal, area);
+				} else {
+					getRoomsList(value, area);
+				}
+			});
+		},
+		error: function(e) {
+			console.log(e);
+			console.log(e.textStatus);
+			$panelBody.html('房间列表加载失败，请刷新重试');
+		}
+	})
 }
 
-// 弹出框提示
-$('.room-id').popover({
-	trigger: 'hover',
-	html: true,
-	title: '房间信息',
-	content: '<p>所属：<span>广东外语外贸大学</span></p>' +
-			'<p>当前/总会员：<span>123/1200</span></p>' +
-			'<p>活跃：<span>2015-12-31 11:11:20</span></p>',
-	placement: 'top'
-});
 
-$('.room-owner').popover({
-	trigger: 'hover',
-	html: true,
-	title: 'TA的资料',
-	content: '<p>昵称：<span>王小锤子</span></p>' +
-			'<p>性别：<span>女</span></p>' +
-			'<p><button type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-earphone"></span> 私信给TA</button></p>' +
-			'<p><button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-plus"></span> 加为好友</button></p>' +
-			'<p><button type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-earphone"></span> 讨论组</button></p>' ,
-	placement: 'bottom',
-	delay: {
-		show: 0,
-		hide: 1300
-	}
-});
+$(function() {
+	 $('#friends-panel-wrap').load('/friends_panel', function() {
+		searchMenuHandle();
+		friendPanelHandle();
+		floatChatbindEvent();
+		
 
-// 展开/收起好友面板
-$('#my-friends').click(function() {
-	if ($('#user-friends-panel').hasClass('in')) {
-		$('#room-list-wrap').removeClass('col-sm-6').addClass('col-sm-9');
-		$('#container-wrap').remove($('#user-friends-panel'));
-	} else {
-		$('#room-list-wrap').removeClass('col-sm-9').addClass('col-sm-6');
-		$('#container-wrap').append($('#user-friends-panel'));
-	}
-})
+		// 加载分类列表
+		var $panelBody = $('#campus-list-wrap').find('.panel-body');
+		$.ajax({
+			type: 'GET',
+			url: '/getCampus',
+			success: function(data) {
+				var temp = ['<ul class="list-unstyled campus-list text-center">'];
 
-// 聊天面板四个功能事件绑定 
-$('#user-friends-panel-menu').click(function(e) {
-	e = e || window.event;
-	var node = e.target || e.srcElement;
+				for (var i = 0, j = data.length; i < j; i++) {
+					temp.push('<li data-val="' + data[i].aId + '">' +
+									'<a href="javascript:getRoomsList(1, ' + data[i].aId + ')">' + data[i].aName + '</a>' +
+									'<span class="pull-right">&gt;&gt;</span>' +
+								'</li>');
+				}
 
-	while (node.tagName !== 'LI') {
-		node = node.parentNode;
-	}
+				temp.push('</ul><img src="img/campus.png" alt="campus_logo" class="campus-logo">');
+				$panelBody.html(temp.join(''));
 
-	var index = node.getAttribute('data-index');
-	index != '3' && $(node.parentNode).find('button').removeClass('btn-info').eq(index).addClass('btn-info');
+				$('#campus-list-wrap').find('li').click(function(e) {
+					e = e || window.event;
+					var node = e.target || e.srcElement;
+					if (node.tagName === 'A') {
+						$(this).addClass('active').siblings().removeClass('active');
+					}
+				});
+			},
+			error: function(e) {
+				console.log(e);
+				console.log(e.textStatus);
+				$panelBody.html('分类列表加载失败，请刷新重试');
+			}
+		});
 
-	switch (index) {
-		case '0':
-			$('#history-chat-list').show();
-			$('#friends-list').hide();
-			$('#discussions-list').hide();
-			break;
-		case '1':
-			$('#history-chat-list').hide();
-			$('#friends-list').show();
-			$('#discussions-list').hide();
-			break;
-		case '2':
-			$('#history-chat-list').hide();
-			$('#friends-list').hide();
-			$('#discussions-list').show();
-			break;
-		case '3':
-			window.open(node.getAttribute('data-href'));
-			break;
-		default:
-			break;
-	}
-})
+		getRoomsList(1);
+		
 
-// 聊天信息右键显示
-$('#history-chat-list').contextmenu(function() {
-	return false;
-}).find('li').popover({
-	trigger: 'dblclick',
-	html: true,
-	content: '<ul class="list-unstyled">' +
-		'<li><a href="#">发送消息</a></li>' +
-		'<li><a href="#">修改备注</a></li>' +
-		'<li><a href="#">删除好友</a></li>' +
-		'<li><a href="#">从会话列表中移除</a></li>' +
-		'<li><a href="#">访问空间</a></li>',
-	placement: 'left'
-});
 
-// 修改好友组名
-$('.friends-list-group-name').dblclick(function() {
-	
-})
+		// 创建房间的图片上传
+		$('#c-room-logo-div').click(function() {
+			$('#c-room-logo').click();
+		});
+		$('#c-room-logo').change(function() {
+			var f = $('#c-room-logo')[0].files[0];
+			$('#c-room-logo-preview').find('img')[0].src = window.URL.createObjectURL(f);
+			$('#c-room-logo-preview').show();
+		});
 
-// 好友分组列表icon展开列表处理
-$('#friends-list').children('li').click(function() {
-	var $icon = $(this).find('span').eq(0);
-	if (!$(this).children('ul').hasClass('in')) {
-		$icon.removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
-	} else {
-		$icon.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');
-	}
-})
+		// 创建房间提交 防止提交后跳转
+		function createRoomSubmit() {
+			$('#create-room-form').ajaxSubmit({
+				success: function() {
+					window.location.href = '/';
+				}
+			});
+			return false;
+		}
 
-$(window).resize(function() {
-	var left = $(this).width() / 2;
-	var top = $(this).height() / 2;
-	$('#chat-wrapper').css({
-		'left': (left - 400) + 'px',
-		'top': (top - 250) + 'px',
-		'margin': 0
+		$('#create-room-btn').click(function() {
+			var rBelongToID = $('#c-room-cat').val();
+			var rName = $('#c-room-name').val();
+			var rImage = $('#c-room-logo').val();
+			var rDesc = $('#c-room-desc').val();
+
+			if (!rBelongToID || !rName || !rImage || !rDesc) {
+				$('#create-room-alert').show();
+				return;
+			}
+			// 只支持后缀 .jpg/.jpeg/.png 格式的图片
+			var ext = rImage.substring(rImage.lastIndexOf('.') + 1, rImage.length).toLowerCase();
+			if (ext !== 'jpg' && ext !== 'jpeg' && ext !== 'png') {
+				$('#create-room-alert').text('只支持后缀 .jpg/.jpeg/.png 格式的图片').show();
+				return;
+			}
+
+			$('#create-room-form').attr('action','/newRoom').submit();
+		});
+
+		// 点击讨论组  选择讨论组
+		joinGroupHandle();
+
+		// 点击添加好友  选择好友分组
+		changeUserGroup();
+
 	});
-});
-$(window).resize();
-
-// 绑定聊天面板拖动事件
-$('.chat-content-frame').load(function() {
-	Util.bindObjsMove(true, 'chat-content-title', 'chat-wrapper');
-})
-
-// 注册登录框 
-$('#modal-login-btn').click(function() {
-	$(this).addClass('btn-success');
-	$('#modal-register-btn').removeClass('btn-success');
-	$('#modal-register-div').hide();
-	$('#modal-login-div').show();
-});
-$('#modal-register-btn').click(function() {
-	$(this).addClass('btn-success');
-	$('#modal-login-btn').removeClass('btn-success');
-	$('#modal-register-div').show();
-	$('#modal-login-div').hide();
-});
-$('#loginState').find('a').eq(0).click(function() {
-	$('#modal-login-btn').click();
-});
-$('#loginState').find('a').eq(1).click(function() {
-	$('#modal-register-btn').click();
 });
