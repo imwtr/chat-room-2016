@@ -3,33 +3,155 @@
 header,nav,section,article,aside,dialog,figure,menu,footer{display:block;}
 h1,h2,h3,h4,h5,h6{font-weight:700}
 body {
-	min-width: 380px;
+    min-width: 300px;
 }
-
-@media (max-width: 765px) {
-	.navbar-header + div {
-		margin-top: 30px;
-		margin-left: 30px;
-	}
-	.navbar-nav > li:last-child,
-	.navbar-form {
-		display: none;
-	}
+.f12 {
+    font-size: 12px;
 }
-@media (max-width: 988px) {
-	#campus-list-wrap img {
-		display: none;
-	}
+.panel-title > span {
+    display: none;
 }
-
-.navbar-nav > li:last-child,
-.navbar-form {
-	/*display: none;*/
-	visibility: hidden;
+@media (max-width: 883px) and (min-width: 864px) { 
+    .navbar-form .input-group{
+        margin-left: 10px !important;
+    }
+    .navbar-form .form-group {
+        width: 50%;
+    }
+    #search-input {
+        width: 101%;
+    }
 }
-#user-friends-panel form {
-	display: none;
+@media (max-width: 850px) and (min-width: 768px) { 
+    .chat-list-time {
+        display: none;
+    }
 }
-#user-friends-panel h4 {
-	margin-bottom: 15px;
+@media (max-width: 863px) and (min-width: 768px) { 
+    .navbar-form .input-group{
+        margin-top: -35px;
+        margin-left: 10px !important;
+    }
+    .navbar-form .form-group {
+        width: 40%;
+    }
+    #search-input {
+        width: 101%;
+    }
+}
+@media (max-width: 772px) and (min-width: 768px) { 
+    #room-list-wrap .col-sm-3 {
+        width: 23.5%;
+    }
+}
+@media (max-width: 767px) {
+    #c-room-desc {
+        margin-left: -15px;
+    }
+    #campus-list-wrap img {
+        display: inline-block;
+    }
+    .panel-title > span {
+        display: inline;
+    }
+    .chat-list-time {
+        display: inline;
+    }
+    .navbar-header + div {
+        margin-top: 30px;
+        margin-left: 30px;
+    }
+    .user-info,
+    .login-state {
+        margin-top: -5px !important;
+        padding-top: 8px;
+        padding-left: 15px;
+        width: 100%;
+        border-top: 1px solid rgba(80, 76, 76, 0.5);
+    }
+    .navbar-form {
+        padding-left: 12px;
+    }
+    .navbar-form .input-group {
+        margin-left: 5px !important;
+    }
+    .navbar-form .input-group-btn button {
+        margin-top: -2px !important;
+        margin-left: 0;
+    }
+    #search-btn {
+        margin-top: 1px;
+    }
+    #search-input {
+        margin-top: 6px;
+        width: 50%;
+    }
+    #chat-closeBtn {
+        top: 0 !important;
+        background-color: #F55A56 !important;
+        opacity: 0.6;
+    }
+    /* 小屏幕上更新聊天浮窗相关元素位置 */
+    #menu-list-btn{
+        display: inline-block !important;
+    }
+    #chat-wrapper {
+        top: 50% !important;
+        left: 50% !important;
+        /*margin-top: -280px !important;*/
+        margin-left: -47% !important;
+        width: 95% !important;
+        height: 552px !important;
+    }
+    #chat-left-menu {
+        position: relative;
+        display: block !important;
+        visibility: hidden;
+        z-index: 10002;
+        margin-top: 64px !important;
+        margin-bottom: -37px !important;
+        width: 40% !important;
+        min-width: 130px !important;
+        max-width: 180px !important;
+        height: 89% !important;
+    }
+    #chat-left-menu img {
+        width: 15px;
+        height: 15px;
+    }
+    .chat-item-nickname {
+        width: 80% !important;
+        font-size: 12px;
+    }
+    #chat-right-content {
+        margin-top: -507px !important;
+        width: 100% !important;
+        height: 99.1% !important;
+        min-width: 100% !important;
+    }
+    #chat-content-userList-chat {
+        width: 25% !important;
+    }
+    #chat-content-userList > div > img {
+        width: 120px;
+        height: 120px;
+    }
+    #chat-content-title-cover {
+        top: 0 !important;
+        left: 0 !important;
+        width: 99.9% !important;
+        height: 64px !important;
+    }
+    #chat-content-title-cover > img {
+        display: inline-block !important;
+    }
+    #chat-right-content iframe {
+        margin-top: -3px !important;
+        height: 104% !important;
+    }
+}
+@media (max-width: 988px) and (min-width: 768px) {
+    #campus-list-wrap img {
+        display: none;
+    }
 }

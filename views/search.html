@@ -4,10 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>咫尺一家 - 你我的在线聊天室</title>
-        <meta name="keywords" content="咫尺一家,在线,聊天室">
-        <meta name="description" content="咫尺一家 - 你我的在线聊天室">
-        <meta name="author" content="">
+        <title>咫尺一家 - 搜索结果页</title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/default.css">
         <link rel="stylesheet" href="css/nav.css">
@@ -25,7 +22,7 @@
             </div>
             <div>
                 <ul class="nav navbar-nav">
-                    <li class="active">
+                    <li>
                         <a href="/">首页</a>
                     </li>
                     <li>
@@ -85,7 +82,7 @@
                         <div class="form-group">
                         <input type="text" class="form-control" id="search-input" placeholder="搜索">
                     </div>
-                        <button type="button" class="btn btn-default navbar-btn" id="search-btn">查找</button>
+                        <button type="button" class="btn btn-default navbar-btn active" id="search-btn">查找</button>
                     </div>
                 </form>
                 
@@ -97,46 +94,41 @@
         <!-- S 主体部分 -->
         <div class="my-container">
             <div class="row" id="container-wrap">
-                <!-- S 分类列表 -->
-                <div class="col-sm-3" id="campus-list-wrap">
+                <!-- S 用户搜索结果 -->
+                <div class="col-sm-3" id="user-search-wrap">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title">分类列表 
+                            <h3 class="panel-title">相关用户 
                                 <span class="glyphicon glyphicon-chevron-down" title="点击收起"></span>
                                 <span class="glyphicon glyphicon-chevron-right hide" title="点击展开"></span>
                             </h3>
                         </div>
-                        <div class="panel-body">                
+                        <div class="panel-body">
+                            <ul class="list-unstyled">
+                            </ul>
+                        </div>
+                        <div class="panel-footer">
                         </div>
                     </div>
                 </div>
-                <!-- E 分类列表 --> 
+                <!-- E 用户搜索结果 --> 
 
-                <!-- S 房间列表 -->
-                <div class="col-sm-9" id="room-list-wrap">
+                <!-- S 房间搜索结果 -->
+                <div class="col-sm-6" id="room-search-wrap">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title">房间列表 
+                            <h3 class="panel-title">相关房间 
                                 <span class="glyphicon glyphicon-chevron-down" title="点击收起"></span>
                                 <span class="glyphicon glyphicon-chevron-right hide" title="点击展开"></span>
-                                <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#create-room-modal" id="create-room">
-                                    <span class="glyphicon glyphicon-plus"></span>&nbsp;创建房间
-                                </button>
                             </h3>
                         </div>
                         <div class="panel-body">
                         </div>
                         <div class="panel-footer">
-                            <!-- S 分页栏 -->
-                            <div id="page-bar">
-                                <ul class="pagination">
-                                </ul>               
-                            </div>
-                            <!-- E 分页栏 -->
                         </div>
                     </div>
                 </div>
-                <!-- E 房间列表 -->
+                <!-- E 房间搜索结果 -->
 
                 <div id="friends-panel-wrap">
                     
@@ -144,6 +136,7 @@
             </div>
         </div>
         <!-- E 主体部分 -->
+        
         <footer>
             <p>Copyright <span>&copy; </span> 2016  <a href="https://github.com/imwtr" target="_blank">chat-room-2016</a> All Rights Reserved</p>
             <p>Best Wishes</p>
@@ -154,76 +147,36 @@
             
         </div>
 
-        <!-- S 创建房间模态框 -->
-        <div class="modal fade" id="create-room-modal" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">创建房间</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal" id="create-room-form" role="form" method="post" enctype="multipart/form-data" onsubmit="return createRoomSubmit();">
-                            <div class="form-group">
-                                <label for="c-room-cat" class="col-sm-3 control-label">*房间分类：</label>
-                                <div class="col-sm-7">
-                                    <select class="form-control" id="c-room-cat" name="c-room-cat">
-                                        <option value="100" selected="selected">其他</option>
-                                        <option value="1">中山大学</option>
-                                        <option value="2">华南理工大学</option>
-                                        <option value="3">华南师范大学</option>
-                                        <option value="4">广州大学</option>
-                                        <option value="5">广东外语外贸大学</option>
-                                        <option value="6">广州中医药大学</option>
-                                        <option value="7">广东药学院</option>
-                                        <option value="8">广东工业大学</option>
-                                        <option value="9">广州美术学院</option>
-                                        <option value="10">星海音乐学院</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" value="1" name="c-room-ownerId" id="c-room-ownerId">
-                                <input type="hidden" value="00:00:00" name="c-room-time" id="c-room-time">
-                                <label for="c-room-name" class="col-sm-3 control-label">*房间名称：</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" id="c-room-name" name="c-room-name"placeholder="请输入房名">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="c-room-logo" class="col-sm-3 control-label">*房间logo：</label>
-                                <div class="col-sm-7">
-                                    <input type="file" id="c-room-logo" name="c-room-logo">
-                                    <div id="c-room-logo-div">+</div>
-                                    <div id="c-room-logo-preview">
-                                        <img src="#">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="from-group">
-                                <label for="c-room-desc" class="col-sm-3 control-label" style="margin-left:-8px;">*房间描述：</label>
-                                <div class="col-sm-7">
-                                    <textarea class="form-control" id="c-room-desc" name="c-room-desc"rows="3" placeholder="请输入房间描述"></textarea>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer" style="margin-top:80px;">
-                        <div class="alert alert-warning pull-left" id="create-room-alert">必填项不能留空，请检查 
-                        </div>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="submit" class="btn btn-primary" id="create-room-btn">创建</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- E 创建房间模态框 -->
-        
-        <!-- E modal 好友分组选择框 -->
+        <!--  modal 好友分组选择框 -->
         <div id="registerlogin-modal-wrap">
             
         </div>
         
+        <!-- 用户搜索结果的用户信息 模板 -->
+        <script type="text/template" id="search-user-template">
+            <li>
+                <a href="javascript:void(0);" class="list-group-item" data-toggle="collapse" data-target="#search-user-{uId}">
+                    <img src="{uImage}" alt="头像" width="40px" height="40px" class="pull-left">
+                    <h6 class="friends-list-nickname" title="{uNickName}">
+                        <span style="background-position:0 {userSexY}px" class="user-sex"></span>
+                        {uNickName}
+                    </h6>
+                    <p class="friends-list-signature">[{userIsOnline}在线] {uSignature}</p>
+                </a>
+                <ul class="list-unstyled collapse text-center friends-list-user {isSelfHide}" id="search-user-{uId}">
+                    <li>
+                        <a href="javascript:void(0);" data-act="addU" class="text-primary {addUHide}"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加好友</a>
+                        <a href="javascript:void(0);" data-act="delU" class="text-warning {delUHide}"><span class="glyphicon glyphicon-remove"></span>&nbsp;删除好友</a>
+                        <a href="/user?id={uId}" target="_blank"><span class="glyphicon glyphicon-star-empty"></span>&nbsp;访问空间&raquo;</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" data-act="chatP" data-isFriends="{uIsFriends}"><span class="glyphicon glyphicon-earphone"></span>&nbsp;发送消息</a>
+                        <a href="javascript:void(0);" data-act="joinG"><span class="glyphicon glyphicon-comment"></span>&nbsp;在讨论组中戳TA</a>
+                    </li>
+                </ul>
+            </li>
+        </script>
+
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery.form.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -234,7 +187,7 @@
         <script src="js/login_register.js"></script>
         <script src="js/float_chat.js"></script>
         <script src="js/friend_panel.js"></script>
-        <script src="js/index.js"></script>
+        <script src="js/search.js"></script>
         <script src="js/default_client.js"></script>
     </body>
 </html>

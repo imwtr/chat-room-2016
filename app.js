@@ -17,13 +17,13 @@ var chat_list = require('./routes/chat_list');
 var user = require('./routes/user');
 var cfg = require('./cfg');
 
-
-
-
 global.Util = require('./public/js/Util');
 
 // 全局model操作器 
 global.modelHandle = require('./dbs/getModel').getModel;
+
+require('./default_db')();
+
 // 全局数据库对象
 console.log('db-uri: ' + cfg.server.uri);
 global.db = mongoose.connect(cfg.server.uri);
@@ -54,6 +54,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/login_register', function(req, res, next) {
   res.sendFile(path.join(__dirname, 'views/login_register.html'));
+})
+.get('/common_modal', function(req, res, next) {
+  res.sendFile(path.join(__dirname, 'views/common_modal.html'));
 })
 .get('/friends_panel', function(req, res, next) {
   res.sendFile(path.join(__dirname, 'views/friends_panel.html'));
