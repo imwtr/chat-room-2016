@@ -1,0 +1,153 @@
+<!-- S 好友面板 -->
+<div id="user-friends-panel" class="panel-collapse collapse col-sm-3">
+    <div class="panel panel-info">
+        <div class="panel-heading user-friends-panel-heading">
+            <h4 class="panel-title">好友面板
+                <span class="glyphicon glyphicon-minus pull-right" title="点击收起面板" style="display: inline;"></span>
+            </h4>
+            <form role="form">
+                <div class="form-group panel-search-form">
+                    <label for="panel-search"></label>
+                    <input type="text" class="form-control" id="panel-search" placeholder="搜索好友、讨论组">
+                    <span class="panel-search-close hide">&times;</span>
+                    <span class="glyphicon glyphicon-search"></span>
+                </div>
+            </form>
+            <!-- S 面板功能区 -->
+            <ul class="list-inline btn-group" id="user-friends-panel-menu">
+                <li data-index="0">
+                    <button type="button" class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </button>
+                </li>
+                <li data-index="1">
+                    <button type="button" class="btn btn-sm">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </button>
+                </li>
+                <li data-index="2">
+                    <button type="button" class="btn btn-sm">
+                        <span class="glyphicon glyphicon-comment"></span>
+                    </button>
+                </li>
+                <li data-index="3" data-href="#">
+                    <button type="button" class="btn btn-sm">
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                    </button>
+                </li>
+            </ul>
+            <!-- E 面板功能区 -->
+        </div>
+        <div class="panel-body user-friends-body">
+            <!-- S 最近聊天 -->
+            <ul class="list-group" id="history-chat-list">
+            </ul>
+            <!-- E 最近聊天区 -->
+            <!-- S 好友分组列表 -->
+            <ul class="list-unstyled" id="friends-list">
+            </ul>
+            <!-- E 好友分组列表 -->
+            <!-- S 讨论组列表 -->
+            <ul class="list-unstyled list-group" id="group-list">
+            </ul>
+            <!-- E 讨论组列表 -->
+            <!-- S 搜索结果列表 -->
+            <ul class="list-unstyled list-group" id="search-list">
+                <div id="search-friends-list">
+                     <h6>
+                        <span>好友搜索结果</span>
+                        <a href="javascript:void(0);" class="pull-right">更多&raquo;&nbsp;</a>
+                     </h6>
+                     <ul class="list-unstyled">
+                     </ul>
+                </div>
+                <div id="search-groups-list">
+                     <h6>
+                        <span>讨论组搜索结果</span>
+                        <a href="javascript:void(0);" class="pull-right">更多&raquo;&nbsp;</a>
+                     </h6>
+                     <ul class="list-unstyled">
+                     </ul>
+                </div>
+            </ul>
+            <!-- E 搜索结果列表 -->
+        </div>
+    </div>
+</div>
+<!-- E 好友面板 -->
+
+<!-- 好友面板分组 模板 -->
+<script type="text/template" id="friends-list-userGroup-template">
+    <li>
+        <p data-toggle="collapse" data-parent="#friends-list" data-target="#friends-list-group-{ugId}">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="friends-list-group-name" title="{ugNameAll}">{ugName}</span>
+            <span class="friends-list-group-summary">{ugCountCur}/{ugCountTotal}(人)</span>
+        </p>
+        <span class="glyphicon glyphicon-pencil pull-right friends-list-group-rename" data-val="0"></span>
+        <ul class="list-unstyled list-group collapse" id="friends-list-group-{ugId}">
+        
+</script>
+<!-- 好友面板分组下的好友信息 模板 -->
+<script type="text/template" id="friends-list-user-template">
+    <li>
+        <a href="javascript:void(0);" class="list-group-item" data-toggle="collapse" data-target="#friends-list-user-{uId}">
+            <img src="{uImage}" alt="头像" width="40px" height="40px" class="pull-left">
+            <h6 class="friends-list-nickname">
+                <span style="background-position:0 {userSexY}px" class="user-sex"></span>
+                {uNickName}
+            </h6>
+            <p class="friends-list-signature">[{userIsOnline}在线] {uSignature}</p>
+        </a>
+        <ul class="list-unstyled collapse text-center friends-list-user" id="friends-list-user-{uId}">
+            <li>
+                <a href="javascript:void(0);" data-act="chatP"><span class="glyphicon glyphicon-earphone"></span>&nbsp;发送消息</a>
+                <a href="http://closer-chat.coding.io/user?id={uId}" target="_blank"><span class="glyphicon glyphicon-star-empty"></span>&nbsp;访问空间&raquo;</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" data-act="delU" class="text-warning"><span class="glyphicon glyphicon-remove"></span>&nbsp;删除好友</a>
+                <a href="javascript:void(0);" data-act="changeUG"><span class="glyphicon glyphicon-indent-left"></span>&nbsp;更换分组&raquo;</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" data-act="joinG"><span class="glyphicon glyphicon-comment"></span>&nbsp;在讨论组中戳TA</a>
+            </li>
+        </ul>
+    </li>
+</script>
+
+<!-- 好友面板好友搜索的好友信息 模板 -->
+<script type="text/template" id="friends-list-searchUser-template">
+    <li>
+        <a href="javascript:void(0);" class="list-group-item" data-toggle="collapse" data-target="#friends-list-searchUser-{uId}">
+            <img src="{uImage}" alt="头像" width="15px" height="15px" class="pull-left">&nbsp;{uNickName}
+        </a>
+        <ul class="list-unstyled collapse text-center friends-list-user" id="friends-list-searchUser-{uId}">
+            <li>
+                <a href="javascript:void(0);" data-act="chatP"><span class="glyphicon glyphicon-earphone"></span>&nbsp;发送消息</a>
+                <a href="http://closer-chat.coding.io/user?id={uId}" target="_blank"><span class="glyphicon glyphicon-star-empty"></span>&nbsp;访问空间&raquo;</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" data-act="delU" class="text-warning"><span class="glyphicon glyphicon-remove"></span>&nbsp;删除好友</a>
+                <a href="javascript:void(0);" data-act="changeUG"><span class="glyphicon glyphicon-indent-left"></span>&nbsp;更换分组&raquo;</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" data-act="joinG"><span class="glyphicon glyphicon-comment"></span>&nbsp;在讨论组中戳TA</a>
+            </li>
+        </ul>
+    </li>
+</script>
+
+<!-- 好友面板讨论组搜索的讨论组信息 模板 -->
+<script type="text/template" id="friends-list-searchGroup-template">
+    <li>
+        <a href="javascript:void(0);" class="list-group-item" data-toggle="collapse" data-target="#friends-list-searchGroup-{gId}" data-time="{gTime}">
+            <img src="img/group.png" alt="头像" width="15px" height="15px" class="pull-left">&nbsp;{gName}
+        </a>
+        <ul class="list-unstyled collapse text-center friends-list-user" id="friends-list-searchGroup-{gId}">
+            <li>
+                <a href="javascript:void(0);" data-act="enterG"><span class="glyphicon glyphicon-comment"></span>&nbsp;进入会话</a>
+                <a href="javascript:void(0);" data-act="quitG" class="text-warning"><span class="glyphicon glyphicon-remove"></span>&nbsp;退出讨论组</a>
+            </li>
+        </ul>
+    </li>
+</script>

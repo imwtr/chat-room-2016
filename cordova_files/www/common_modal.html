@@ -1,0 +1,113 @@
+        <!-- S 浮窗  聊天窗口的容器 -->
+        <div id="chat-wrapper">
+            <div id="chat-left-menu">
+                <ul class="list-unstyled list-group">
+                </ul>
+            </div>
+            <div id="chat-right-content">
+            </div>
+            <div id="chat-content-title-cover">
+                <img src="/img/group.png" width="40px" height="40px">
+                <h4>
+                    <a href="javascript:void(0);" target="_blank" id="chat-title">好友</a>
+                </h4>
+                <p id="chat-title-sub">
+                    <a href="javascript:void(0);" title="">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </a>
+                    <span id="chat-title-signature">签名</span>
+                </p>
+    
+            </div>
+            <button type="button" id="chat-closeBtn">&times;</button>
+            <button class="pull-left btn btn-info btn-xs" id="menu-list-btn">
+                <span class="glyphicon glyphicon-list"></span>
+            </button>
+            <div id="chat-content-userList-chat" class="hide">
+                <div id="userList">
+                    <p>讨论组成员
+                        <span>0</span>人
+                    </p>
+                    <ul class="list-unstyled">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- E 浮窗  聊天窗口的容器 -->
+
+        <!-- S modal 错误提示框 -->
+        <div id="tips-div" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>请登录后再进行操作哦</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- E modal 错误提示框 -->
+        <!-- S modal 删除好友提示框 -->
+        <div id="tips-delete-friend" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>确定要删除该好友么？</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">确定</button>
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- E modal 删除好友提示框 -->
+        <!-- S modal 讨论组选择框 -->
+        <div id="tips-choose-group" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">添加至已有讨论组</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="modal-group-list">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info pull-right" data-dismiss="modal" id="group-choose-btn">确定</button>
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- E modal 讨论组选择框 -->
+        <!-- S modal 好友分组组选择框 -->
+        <div id="tips-choose-userGroup" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">加入下列分组</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="modal-userGroup-list">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info pull-right" data-dismiss="modal" id="userGroup-choose-btn">确定</button>
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>

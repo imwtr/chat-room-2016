@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>咫尺一家 - 搜索结果页</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/default.css">
+        <link rel="stylesheet" href="css/nav.css">
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/room_list.css">
+        <link rel="stylesheet" href="css/login_modal.css">
+    </head>
+    <body>
+        <!-- S 导航栏 -->
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <a href="http://closer-chat.coding.io/" class="navbar-brand">
+                    <img src="img/logo0.png" alt="logo">
+                </a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="http://closer-chat.coding.io/">首页</a>
+                    </li>
+                    <li>
+                        <a href="http://music.163.com/" target="_blank">音乐广场</a>
+                    </li>
+                </ul>
+                <div class="nav navbar-nav navbar-right">
+                    <div class="login-state" id="loginState">
+                        <a href="#" data-toggle="modal" data-target="#registerlogin-modal">登录</a>&nbsp;
+                        <a href="#" data-toggle="modal" data-target="#registerlogin-modal">注册</a>
+                    </div>
+                    <div class="user-info" id="userInfo">
+                        <a href="#">
+                            <img src="#" alt="头像" width="30px" height="30px" class="img-circle">
+                        </a>
+                        <a href="#" class="data-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="user-menu">
+                            <li>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-star-empty"></span>&nbsp;个人中心
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#user-friends-panel" data-toggle="collapse" id="my-friends">
+                                    <span class="glyphicon glyphicon-user"></span>&nbsp;我的好友
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li id="user-setting">
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-cog"></span>&nbsp;设置中心
+                                </a>
+                            </li>
+                            <li id="user-logout">
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-log-out"></span>&nbsp;注销
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <form class="navbar-form" role="search" name="search-form" method="get" action="http://closer-chat.coding.io/search">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="search-condition">不限
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" id="search-menu">
+                                <li data-val = "不限" class="active"><a href="#">不限</a></li>
+                                <li data-val = "房名"><a href="#">房名</a></li>
+                                <li data-val = "房号"><a href="#">房号</a></li>
+                                <li data-val = "昵称"><a href="#">昵称</a></li>
+                            </ul>
+                        </div>
+                        <div class="form-group">
+                        <input type="text" class="form-control" id="search-input" placeholder="搜索">
+                    </div>
+                        <button type="button" class="btn btn-default navbar-btn active" id="search-btn">查找</button>
+                    </div>
+                </form>
+                
+                
+            </div>
+        </nav>
+        <!-- E 导航栏 -->
+        
+        <!-- S 主体部分 -->
+        <div class="my-container">
+            <div class="row" id="container-wrap">
+                <!-- S 用户搜索结果 -->
+                <div class="col-sm-3" id="user-search-wrap">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">相关用户 
+                                <span class="glyphicon glyphicon-chevron-down" title="点击收起"></span>
+                                <span class="glyphicon glyphicon-chevron-right hide" title="点击展开"></span>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-unstyled">
+                            </ul>
+                        </div>
+                        <div class="panel-footer">
+                        </div>
+                    </div>
+                </div>
+                <!-- E 用户搜索结果 --> 
+
+                <!-- S 房间搜索结果 -->
+                <div class="col-sm-6" id="room-search-wrap">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">相关房间 
+                                <span class="glyphicon glyphicon-chevron-down" title="点击收起"></span>
+                                <span class="glyphicon glyphicon-chevron-right hide" title="点击展开"></span>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                        </div>
+                        <div class="panel-footer">
+                        </div>
+                    </div>
+                </div>
+                <!-- E 房间搜索结果 -->
+
+                <div id="friends-panel-wrap">
+                    
+                </div>
+            </div>
+        </div>
+        <!-- E 主体部分 -->
+        
+        <footer>
+            <p>Copyright <span>&copy; </span> 2016  <a href="https://github.com/imwtr" target="_blank">chat-room-2016</a> All Rights Reserved</p>
+            <p>Best Wishes</p>
+        </footer>
+        
+        <!-- 常规modal框 -->
+        <div id="common-modal-wrap">
+            
+        </div>
+
+        <!--  modal 好友分组选择框 -->
+        <div id="registerlogin-modal-wrap">
+            
+        </div>
+        
+        <!-- 用户搜索结果的用户信息 模板 -->
+        <script type="text/template" id="search-user-template">
+            <li>
+                <a href="javascript:void(0);" class="list-group-item" data-toggle="collapse" data-target="#search-user-{uId}">
+                    <img src="{uImage}" alt="头像" width="40px" height="40px" class="pull-left">
+                    <h6 class="friends-list-nickname" title="{uNickName}">
+                        <span style="background-position:0 {userSexY}px" class="user-sex"></span>
+                        {uNickName}
+                    </h6>
+                    <p class="friends-list-signature">[{userIsOnline}在线] {uSignature}</p>
+                </a>
+                <ul class="list-unstyled collapse text-center friends-list-user {isSelfHide}" id="search-user-{uId}">
+                    <li>
+                        <a href="javascript:void(0);" data-act="addU" class="text-primary {addUHide}"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加好友</a>
+                        <a href="javascript:void(0);" data-act="delU" class="text-warning {delUHide}"><span class="glyphicon glyphicon-remove"></span>&nbsp;删除好友</a>
+                        <a href="http://closer-chat.coding.io/user?id={uId}" target="_blank"><span class="glyphicon glyphicon-star-empty"></span>&nbsp;访问空间&raquo;</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" data-act="chatP" data-isFriends="{uIsFriends}"><span class="glyphicon glyphicon-earphone"></span>&nbsp;发送消息</a>
+                        <a href="javascript:void(0);" data-act="joinG"><span class="glyphicon glyphicon-comment"></span>&nbsp;在讨论组中戳TA</a>
+                    </li>
+                </ul>
+            </li>
+        </script>
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.form.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/md5.min.js"></script>
+        <script src="js/Util.js"></script>
+        <script src="socket.io/socket.io.js"></script>
+        <script src="js/popoverUserEvent.js"></script>
+        <script src="js/login_register.js"></script>
+        <script src="js/float_chat.js"></script>
+        <script src="js/friend_panel.js"></script>
+        <script src="js/search.js"></script>
+        <script src="js/default_client.js"></script>
+    </body>
+</html>

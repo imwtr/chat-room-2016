@@ -1,0 +1,45 @@
+.my-container {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+#chat-content-wrapper {
+    overflow: auto;
+    margin-bottom: 15px;
+}
+#chat-content-title {
+    cursor: default;
+}
+
+#room-info {
+    
+}
+#room-info-content {
+    margin-top: 40px;
+    font-size: 12px;
+}
+#room-info-content .bold {
+    font-weight: 700;
+}
+#room-info-content .grey {
+    word-break: break-all;
+    color: #666;
+}
+
+/* 讨论组选择 */
+#modal-group-list .radio,
+#tips-choose-userGroup .radio {
+    overflow: hidden;
+    padding: 5px;
+    color: #333;
+    border-radius: 3px;
+}
+#modal-group-list .radio:hover,
+#tips-choose-userGroup .radio:hover {
+    background-color: #BFE3F5;
+}
+
+#new-userGroup-input {
+    max-width: 150px;
+    margin-right: 10px;
+    font-size: 12px;
+}

@@ -1,0 +1,72 @@
+/* 注册登录modal */
+#registerlogin-modal-alert-success,
+#registerlogin-modal-alert {
+    display: none;
+    float: left;
+    margin-top: 2px;
+    margin-left: 20px;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+.modal-register-sex-wrapper {
+    margin-left: 5%;
+}
+.modal-register-sex-wrapper label:first-child:after,
+.modal-register-sex-wrapper label:last-child:after {
+    content: "";
+    margin-top: -8px;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-image: url(../img/sex.png);
+    background-size: 15px;
+}
+.modal-register-sex-wrapper label:first-child:after {
+    background-position: 0 0;
+}
+.modal-register-sex-wrapper label:last-child:after {
+    background-position: 0 -15px;
+}
+#pwdBack-alert,
+#modal-pwdBack-div,
+#email-validate-btn,
+#email-validate-div {
+    display: none;
+}
+#modal-pwdBack-div h5 {
+    margin-top: -5px;
+}
+.with-pwdBack {
+    height: 130px;
+}
+#pwdBack-alert {
+    position: absolute;
+    bottom: -10px;
+    left: 30px;
+    padding: 3px;
+    font-size: 12px;
+}
+#email-validate-btn {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    width: 120px;
+}
+#email-validate-input {
+    float: right;
+    width: 130px;
+    text-align: center;
+}
+#email-validate-input + span {
+    right: 5px;
+}
+/* popover窗口 用户性别 */
+.user-sex,
+.popover-sex {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-image: url(../img/sex.png);
+    background-size: 15px;
+    background-position: 0 0;
+}

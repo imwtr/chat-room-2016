@@ -204,7 +204,7 @@ function sendEmailTo(emailTo, title, content, cb) {
         port: 465,
         auth: {
             user: 'f_imwtr_f@126.com',
-            pass: 'here_is_your_email_psw'
+            pass: 'Empty_imwtr'
         }
     });
 

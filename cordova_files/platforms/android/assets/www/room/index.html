@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>聊天室聊天</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/default.css">
+        <link rel="stylesheet" href="css/chat_list.css">
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/nav.css">
+        <link rel="stylesheet" href="css/room_list.css">
+        <link rel="stylesheet" href="css/login_modal.css">
+    </head>
+    <body>
+        <!-- S 导航栏 -->
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <a href="http://closer-chat.coding.io/" class="navbar-brand">
+                    <img src="img/logo0.png" alt="logo">
+                </a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="http://closer-chat.coding.io/">首页</a>
+                    </li>
+                    <li>
+                        <a href="http://music.163.com/" target="_blank">音乐广场</a>
+                    </li>
+                </ul>
+                <div class="nav navbar-nav navbar-right">
+                    <div class="login-state" id="loginState">
+                        <a href="#" data-toggle="modal" data-target="#registerlogin-modal">登录</a>&nbsp;
+                        <a href="#" data-toggle="modal" data-target="#registerlogin-modal">注册</a>
+                    </div>
+                    <div class="user-info" id="userInfo">
+                        <a href="#">
+                            <img src="#" alt="头像" width="30px" height="30px" class="img-circle">
+                        </a>
+                        <a href="#" class="data-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="user-menu">
+                            <li>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-star-empty"></span>&nbsp;个人中心
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#user-friends-panel" data-toggle="collapse" id="my-friends">
+                                    <span class="glyphicon glyphicon-user"></span>&nbsp;我的好友
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li id="user-setting">
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-cog"></span>&nbsp;设置中心
+                                </a>
+                            </li>
+                            <li id="user-logout">
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-log-out"></span>&nbsp;注销
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <form class="navbar-form" role="search" name="search-form" method="get" action="http://closer-chat.coding.io/search">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="search-condition">不限
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" id="search-menu">
+                                <li data-val = "不限" class="active"><a href="#">不限</a></li>
+                                <li data-val = "房名"><a href="#">房名</a></li>
+                                <li data-val = "房号"><a href="#">房号</a></li>
+                                <li data-val = "昵称"><a href="#">昵称</a></li>
+                            </ul>
+                        </div>
+                        <div class="form-group">
+                        <input type="text" class="form-control" id="search-input" placeholder="搜索">
+                    </div>
+                        <button type="button" class="btn btn-default navbar-btn" id="search-btn">查找</button>
+                    </div>
+                </form>
+                
+                
+            </div>
+        </nav>
+        <!-- E 导航栏 -->
+
+        <div class="my-container" id="container-wrap">
+            <div class="row">
+                <div class="col-sm-3" id="room-info">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">房间信息 
+                                <span class="glyphicon glyphicon-chevron-down" title="点击收起"></span>
+                                <span class="glyphicon glyphicon-chevron-right hide" title="点击展开"></span>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                <a href="http://closer-chat.coding.io/" class="pull-right">返回聊天大厅--></a>
+                            </p>
+                            <div class="text-center" id="room-info-content">
+                                <p>
+                                    <span class="glyphicon glyphicon-home"></span> &nbsp;
+                                    [ <a href="javascript:void(0);" data-toggle="tooltip" title="房号"></a>
+                                     ] &nbsp;<a href="javascript:void(0);" data-toggle="tooltip" title="房名" style="word-break: break-all;"></a>
+                                </p>
+                                <p>所属分类：
+                                    <span class="bold"></span>
+                                </p>
+                                <p>
+                                    <button type="button" class="btn btn-primary btn-xs" data-act="1">
+                                        <span class="glyphicon glyphicon-plus"></span> 关注此房间
+                                    </button>
+                                </p>
+                                
+                                <p>房间描述：</p>
+                                <p class="grey"><p>
+                                    <img src="http://closer-chat.coding.io/img/room/room_1_1.jpg" width="200px" height="200px">
+                                </p>
+                                
+                                <p style="word-break: break-all;"></p>
+                                <p class="hide"></p>
+                                <p>当前在线
+                                    <span class="bold">0</span>人
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9" id="chat-content-wrapper">
+                    <!-- <div> -->
+                        <div id="chat-content-title">
+                            <h4 class="chat-title">
+                                <a href="javascript:void(0);"></a>
+                            </h4>
+                            <p class="chat-title-sub">
+                                <a href="javascript:void(0);">
+                                    <span class="glyphicon glyphicon-info-sign"></span>&nbsp;
+                                </a>
+                                <span class="chat-title-signature"></span>
+                            </p>
+                        </div>
+                        <div id="chat-content-chats">
+                            <ul class="list-unstyled list-group" id="chat-content-chats-list">
+                                <div class="text-center">
+                                    <span class="glyphicon glyphicon-time blue"></span>
+                                    <a href="javascript:void(0);" id="chat-content-chats-more" data-toggle="tooltip" title="Tip: 群聊记录只保留最近1000条哦" data-pn="0">&nbsp;查看更多消息</a>
+                                </div>
+                            </ul>
+                            <div id="chat-content-editBox">
+                                <div id="editBox-menu-cover"></div>
+                                <div class="btn-group dropup" id="chat-content-editBox-menu">
+                                    <span>
+                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                                            <span class="glyphicon glyphicon-list-alt"></span>
+                                        </button>
+                                        <ol class="dropdown-menu" role="menu">
+                                            <li class="dropdown-header">快捷回复</li>
+                                            <li class="divider"></li>
+                                            <li data-val="1">1. 谢谢你哈</li>
+                                            <li data-val="2">2. 你好</li>
+                                            <li data-val="3">3. 吃饭没</li>
+                                            <li data-val="4">4. 天黑请闭眼</li>
+                                            <li data-val="5">5. o.o 好了好了我知道了</li>
+                                        </ol>
+                                    </span>
+                                    
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        <span class="face"></span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-picture"></span>
+                                    </button>
+                                    <form method="post" id="chat-form-pic" enctype="multipart/form-data" onsubmit="return sendFormPic()" class="hide">
+                                        <input type="text" name="form-pic-num" id="form-pic-num" value="0">
+                                    </form>
+                                    
+                                    <!-- S 表情包 -->
+                                    <div class="dropdown-menu" role="menu" id="emotion-div">
+                                        <div id="emotion-wrap">
+                                            <table id="emotion-tb">
+                                            
+                                            </table>
+                                            <table id="emotion-qq">
+                                            
+                                            </table>
+                                            <table id="emotion-weixin">
+                                                
+                                            </table>
+                                            <table id="emotion-yanwenzi">
+                                                
+                                            </table>
+                                            <table id="emotion-tu">
+                                                
+                                            </table>
+                                        </div>
+                                        <ul class="list-unstyled list-inline" id="emotion-menu">
+                                            <li class="active" data-val="tb" style="padding:2px 2px 1px 2px;">
+                                                <img src="img/emotion/tb/7.png" alt="emition-menu">
+                                            </li>
+                                            <li data-val="qq" style="padding-bottom:4px;">
+                                                <img src="img/emotion/qq/21.gif" alt="emition-menu">
+                                            </li>
+                                            <li data-val="weixin">
+                                                <img src="img/emotion/wx/4.png" alt="emition-menu">
+                                            </li>
+                                            <li data-val="yanwenzi" style="padding: 8px 5px;">✪ω✪</li>
+                                            <li data-val="tu">
+                                                <img src="img/emotion/tu/1.gif" alt="emition-menu" width="25px" height="25px">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- E 表情包 -->
+                                </div>
+                                <div class="pull-right" id="chat-content-send">
+                                    <div class="btn-group dropup">
+                                        <button type="button" class="btn btn-info btn-sm">发送
+                                            <span class="glyphicon glyphicon-send"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                        </button>
+                                        <!--  data-val为1代表使用 ctrl + enter快捷键 -->
+                                        <ul class="dropdown-menu" role="menu" data-val="1">
+                                            <li data-index="0">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                                <span>按Enter键发送消息</span>
+                                            </li>
+                                            <li data-index="1">
+                                                <span class="glyphicon glyphicon-ok"></span>
+                                                <span>按Ctrl+Enter键发送消息</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div id="chat-content-editbox-edit">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div id="chat-content-userList">
+                            <div id="userList-liked">
+                                <p>在线会员
+                                    <span>0</span>人
+                                </p>
+                                <ul class="list-unstyled">
+                                </ul>
+                            </div>
+                            <div id="userList-unliked">
+                                <p>游客
+                                    <span>0</span>人
+                                </p>
+                                <ul class="list-unstyled">
+                                </ul>
+                            </div>
+                        </div>
+                        
+                    <!-- </div> -->
+                </div>
+                
+                <div id="friends-panel-wrap">
+                </div>
+            
+            </div>
+            
+        </div>
+        <footer>
+            <p>Copyright <span>&copy; </span> 2016  <a href="https://github.com/imwtr" target="_blank">chat-room-2016</a> All Rights Reserved</p>
+            <p>Best Wishes</p>
+        </footer>
+        <div id="registerlogin-modal-wrap">
+            
+        </div>
+        
+        <!-- 常规modal框 -->
+        <div id="common-modal-wrap">
+            
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.form.min.js"></script>
+        <script src="js/md5.min.js"></script>
+        <script src="socket.io/socket.io.js"></script>
+        <script src="js/Util.js"></script>
+        <script src="js/login_register.js"></script>
+        <script src="js/float_chat.js"></script>
+        <script src="js/popoverUserEvent.js"></script>
+        <script src="js/friend_panel.js"></script>
+        <script src="js/getChats.js"></script>
+        <script src="js/editBox.js"></script>
+        <script src="js/room_list.js"></script>
+        <script src="js/room_client.js"></script>
+        <script src="js/default_client.js"></script>
+    </body>
+
+</html>

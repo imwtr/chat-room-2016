@@ -1,0 +1,111 @@
+<!-- S 注册/登录 模态框 -->
+<div class="modal fade" id="registerlogin-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success" id="modal-login-btn">登录</button>
+                        <button type="button" class="btn btn-default" id="modal-register-btn">注册</button>
+                        <div class="alert alert-warning" id="registerlogin-modal-alert">
+                            必填项不能留空
+                        </div>
+                        <div class="alert alert-success " id="registerlogin-modal-alert-success">
+                            注册成功，请登录吧
+                        </div>
+                    </div>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div id="modal-login-div">
+                    <form class="form-horizontal" role="form" method="post" onsubmit="return false;">
+                        <div class="form-group row">
+                            <label for="modal-login-user" class="control-label"></label>
+                            <div class="col-sm-9 col-sm-offset-1">
+                                <input type="text" class="form-control" name="modal-login-user" id="modal-login-user" placeholder="请输入邮箱账号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="modal-login-pwd" class="control-label"></label>
+                            <div class="col-sm-9 col-sm-offset-1">
+                                <input type="password" class="form-control" name="modal-login-pwd" id="modal-login-pwd" placeholder="请输入密码">
+                            </div>
+                        </div>
+                        <div class="checkbox">
+                            <label for="modal-login-remember" class="control-label"></label>
+                            <div class="col-sm-9 col-sm-offset-1">
+                                <input type="checkbox" name="modal-login-remember" id="modal-login-remember" style="margin-left:-10px;">&nbsp;&nbsp;&nbsp;记住我
+                                <a href="javascript:void(0);" class="pull-right" id="pwd_back">忘记密码？</a>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block" style="margin-top:10px;margin-left:9%;width:73%;">登 录</button>
+                    </form>
+                </div>
+                <div id="modal-register-div">
+                    <form class="form-horizontal" role="form" method="post" onsubmit="return false;">
+                        <div class="form-group">
+                            <label for="modal-register-user" class="control-label"></label>
+                            <div class="col-sm-9 col-sm-offset-1">
+                                <input type="text" class="form-control" name="modal-register-user" id="modal-register-user" placeholder="请输入电子邮箱地址">
+                                <button type="button" id="email-validate-btn" class="btn btn-info btn-xs">发送至邮箱验证</button>
+                                <div class="has-feedback" id="email-validate-div">
+                                    <input type="text" class="form-control input-sm" id="email-validate-input" placeholder="请输入验证码">
+                                    <span class="glyphicon form-control-feedback" id="email-validate-span"></span>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="modal-register-pwd" class="control-label"></label>
+                            <div class="col-sm-9 col-sm-offset-1">
+                                <input type="password" class="form-control" name="modal-register-pwd" id="modal-register-pwd" placeholder="请输入5-15位密码，区分大小写">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="modal-register-pwdR" class="control-label"></label>
+                            <div class="col-sm-9 col-sm-offset-1">
+                                <input type="password" class="form-control" name="modal-register-pwdR" id="modal-register-pwdR" placeholder="再次输入密码确认">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="modal-register-nickname" class="control-label"></label>
+                            <div class="col-sm-9 col-sm-offset-1">
+                                <input type="text" class="form-control" name="modal-register-nickname" id="modal-register-nickname" placeholder="请输入昵称，聊天时将直接展示您的昵称">
+                            </div>
+                        </div>
+                        <div class="modal-register-sex-wrapper">
+                            <label class="checkbox-inline">
+                                <input type="radio" name="modal-register-sex" id="modal-register-boy" checked>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="modal-register-sex" id="modal-register-girl">
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block" style="margin-top:10px;margin-left:9%;width:73%;">注 册</button>
+                    </form>
+                </div>
+                <div id="modal-pwdBack-div">
+                    <h5>重置密码 &raquo;
+                        <a href="javascript:void(0);" id="backToLogin" class="pull-right">返回登录页面</a>
+                    </h5>
+                    <form>
+                        <div class="form-group">
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="请输入邮箱账号" id="pwdBack-input">
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-info" id="pwdBack-btn">重置密码</button>
+                            </div>
+                            <p class="alert alert-success" id="pwdBack-alert">已将新密码发送至邮箱，请现在可返回进行登录</p>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- E 注册/登录 模态框 -->
