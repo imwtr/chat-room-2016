@@ -1,7 +1,7 @@
 # chat-room-2016
 Chat room, bases on Node.js DEV, using Cordova to build an APK
 
-To let github figure out the project's language accurately, cordova_files is under vendors resp. now
+To let github figure out the project's language accurately, **cordova_files** are under **vendors/'** now
 
 Data Management: MongoDB
 
